@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { apiAuth, apiRefreshToken } from "../helpers/API";
 import Login from "./Auth/Login";
+import PersistLogin from "./Auth/PersistLogin";
 import Register from "./Auth/Register";
 import { useAuthStore } from "./store";
 
@@ -11,9 +12,7 @@ function App() {
     const token = useAuthStore((state) => state.token);
     const login = useAuthStore((state) => state.login);
 
-    const [mounted, setMounted] = useState(false);
-
-    // Set up axios bearer token interceptor
+    // Set up axios interceptors
     useEffect(() => {
         apiAuth.interceptors.request.use(
             (config) => {
@@ -25,27 +24,29 @@ function App() {
                 Promise.reject(error);
             }
         );
+
+        apiAuth.interceptors.response.use(
+            (response) => response,
+            async (error) => {
+                const prevRequest = error?.config;
+                if (error?.response?.status === 403 && !prevRequest?.sent) {
+                    prevRequest.sent = true;
+                    const response = await apiRefreshToken();
+                    if (response.status === 200) {
+                        prevRequest.headers["Authorization"] = "Bearer " + response.data.access_token;
+                        await login(response.data.access_token);
+                        return apiAuth(prevRequest);
+                    }
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        return () => {
+            apiAuth.interceptors.request.eject();
+            apiAuth.interceptors.response.eject();
+        };
     }, [token]);
-
-    // on component mount, request new access token - if successful, log in with said token
-    useEffect(() => {
-        async function refreshToken() {
-            const response = await apiRefreshToken();
-
-            if (response.status === 200) await login(response.data.access_token);
-
-            setMounted(true);
-        }
-
-        refreshToken();
-    }, []);
-
-    // on component unmount, set mounted to false
-    useEffect(() => {
-        return () => setMounted(false);
-    }, []);
-
-    if (!mounted) return null;
 
     return (
         <HashRouter>
@@ -53,11 +54,11 @@ function App() {
                 {currentUser && token ? (
                     <Route path="/*" element={<button onClick={logout}>Logout</button>} />
                 ) : (
-                    <>
+                    <Route element={<PersistLogin />}>
                         <Route path="/*" element={<Navigate to="/login" />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
-                    </>
+                    </Route>
                 )}
             </Routes>
         </HashRouter>
