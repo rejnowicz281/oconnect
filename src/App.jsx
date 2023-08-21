@@ -4,11 +4,15 @@ import { apiAuth, apiRefreshToken } from "../helpers/API";
 import Login from "./Auth/Login";
 import PersistLogin from "./Auth/PersistLogin";
 import Register from "./Auth/Register";
+import Friends from "./Friends/Friends";
+import Received from "./Invites/Received";
+import Sent from "./Invites/Sent";
+import MainLayout from "./Layout/MainLayout";
+import Users from "./Users/Users";
 import { useAuthStore } from "./store";
 
 function App() {
     const currentUser = useAuthStore((state) => state.currentUser);
-    const logout = useAuthStore((state) => state.logout);
     const token = useAuthStore((state) => state.token);
     const login = useAuthStore((state) => state.login);
 
@@ -52,7 +56,13 @@ function App() {
         <HashRouter>
             <Routes>
                 {currentUser && token ? (
-                    <Route path="/*" element={<button onClick={logout}>Logout</button>} />
+                    <Route element={<MainLayout />}>
+                        <Route path="/*" element={<Navigate to="/friends" />} />
+                        <Route path="/friends" element={<Friends />} />
+                        <Route path="/users" element={<Users />} />
+                        <Route path="/invites/received" element={<Received />} />
+                        <Route path="/invites/sent" element={<Sent />} />
+                    </Route>
                 ) : (
                     <Route element={<PersistLogin />}>
                         <Route path="/*" element={<Navigate to="/login" />} />
