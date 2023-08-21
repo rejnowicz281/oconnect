@@ -8,7 +8,7 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [persist, setPersist] = useState(false);
+    const [persist, setPersist] = useState(true);
     const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
