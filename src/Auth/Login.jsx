@@ -8,6 +8,7 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [persist, setPersist] = useState(false);
     const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
@@ -15,6 +16,7 @@ function Login() {
         const res = await apiLogin(email, password);
 
         if (res.status == 200) {
+            localStorage.setItem("persist", persist);
             await login(res.data.access_token);
         } else {
             setError(res.data.message);
@@ -44,6 +46,15 @@ function Login() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                </div>
+                <div className="form-field">
+                    <input
+                        onChange={(e) => setPersist(e.target.checked)}
+                        checked={persist}
+                        type="checkbox"
+                        id="remember-me"
+                    />
+                    <label htmlFor="remember-me">Remember me</label>
                 </div>
                 <button className="login-button" type="submit">
                     Log In

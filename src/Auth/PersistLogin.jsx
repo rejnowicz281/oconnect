@@ -12,7 +12,7 @@ function PersistLogin() {
     // on component mount, request new access token - if successful, log in with said token
     useEffect(() => {
         async function refreshToken() {
-            if (!token) {
+            if (!token && localStorage.getItem("persist") === "true") {
                 const response = await apiRefreshToken();
 
                 if (response.status === 200) await login(response.data.access_token);
