@@ -18,7 +18,7 @@ function App() {
 
     // Set up axios interceptors
     useEffect(() => {
-        apiAuth.interceptors.request.use(
+        const requestInterceptor = apiAuth.interceptors.request.use(
             (config) => {
                 if (token) config.headers["Authorization"] = "Bearer " + token;
 
@@ -29,7 +29,7 @@ function App() {
             }
         );
 
-        apiAuth.interceptors.response.use(
+        const responseInterceptor = apiAuth.interceptors.response.use(
             (response) => response,
             async (error) => {
                 const prevRequest = error?.config;
@@ -47,8 +47,8 @@ function App() {
         );
 
         return () => {
-            apiAuth.interceptors.request.eject();
-            apiAuth.interceptors.response.eject();
+            apiAuth.interceptors.request.eject(requestInterceptor);
+            apiAuth.interceptors.response.eject(responseInterceptor);
         };
     }, [token]);
 
