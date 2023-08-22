@@ -4,6 +4,7 @@ import { apiAuth, apiRefreshToken } from "../helpers/API";
 import Login from "./Auth/Login";
 import PersistLogin from "./Auth/PersistLogin";
 import Register from "./Auth/Register";
+import Chat from "./Chat/Chat";
 import Friends from "./Friends/Friends";
 import Received from "./Invites/Received";
 import Sent from "./Invites/Sent";
@@ -62,6 +63,7 @@ function App() {
                         <Route path="/users" element={<Users />} />
                         <Route path="/invites/received" element={<Received />} />
                         <Route path="/invites/sent" element={<Sent />} />
+                        <Route path="/chat/:id" element={<Chat />} />
                     </Route>
                 ) : (
                     <Route element={<PersistLogin />}>

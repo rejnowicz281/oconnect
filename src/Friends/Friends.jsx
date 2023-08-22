@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { apiDeleteFriendship, apiFetchFriends } from "../../helpers/API";
 import { useAuthStore } from "../store";
 
@@ -28,7 +29,8 @@ function Friends() {
             <ul>
                 {friends.map((friend) => (
                     <li key={friend.info._id}>
-                        {friend.info.first_name} {friend.info.last_name}
+                        <Link to={"/chat/" + friend.chat_id}>Chat</Link> | {friend.info.first_name}{" "}
+                        {friend.info.last_name}
                         <button onClick={async () => await apiDeleteFriendship(friend.friendship_id)} type="button">
                             Unfriend
                         </button>
