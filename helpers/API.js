@@ -193,3 +193,13 @@ export async function apiDeleteMessage(chat_id, message_id) {
         return error.response;
     }
 }
+
+export async function apiFetchPosts() {
+    try {
+        const response = await apiAuth.get("posts");
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}

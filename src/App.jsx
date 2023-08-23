@@ -9,6 +9,7 @@ import Friends from "./Friends/Friends";
 import Received from "./Invites/Received";
 import Sent from "./Invites/Sent";
 import MainLayout from "./Layout/MainLayout";
+import Posts from "./Posts/Posts";
 import Users from "./Users/Users";
 import { useAuthStore } from "./store";
 
@@ -69,6 +70,7 @@ function App() {
                         <Route path="/invites/received" element={<Received />} />
                         <Route path="/invites/sent" element={<Sent />} />
                         <Route path="/chat/:id" element={<Chat />} />
+                        <Route path="/posts" element={<Posts />} />
                     </Route>
                 ) : (
                     <Route element={<PersistLogin />}>
