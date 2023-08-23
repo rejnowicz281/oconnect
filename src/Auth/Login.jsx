@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { apiLogin } from "../../helpers/API";
+import { apiDemoLogin, apiLogin } from "../../helpers/API";
 import { useAuthStore } from "../store";
 
 function Login() {
@@ -15,13 +15,23 @@ function Login() {
         e.preventDefault();
         const res = await apiLogin(email, password);
 
+        handleLoginResponse(res);
+    };
+
+    const handleDemoLogin = async () => {
+        const res = await apiDemoLogin();
+
+        handleLoginResponse(res);
+    };
+
+    function handleLoginResponse(res) {
         if (res.status == 200) {
             localStorage.setItem("persist", persist);
-            await login(res.data.access_token);
+            login(res.data.access_token);
         } else {
             setError(res.data.message);
         }
-    };
+    }
 
     return (
         <div className="auth-box">
@@ -60,6 +70,9 @@ function Login() {
                     Log In
                 </button>
             </form>
+            <button onClick={handleDemoLogin} type="button">
+                Demo Login
+            </button>
             <div className="auth-link-box">
                 <Link to="/register" className="auth-link">
                     Register <span className="auth-link-arrow">→</span>
