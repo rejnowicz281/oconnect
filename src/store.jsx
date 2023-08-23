@@ -22,6 +22,7 @@ export const useAuthStore = create((set) => ({
 
     logout: async () => {
         await apiLogout();
+        localStorage.removeItem("persist");
         set({ token: null, currentUser: null });
     },
 }));
