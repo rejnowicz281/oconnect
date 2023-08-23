@@ -8,9 +8,16 @@ export const useAuthStore = create((set) => ({
     currentUser: null,
 
     login: async (token) => {
-        const decodedUser = await jwt_decode(token);
+        const decodedToken = await jwt_decode(token);
 
-        set({ token, currentUser: decodedUser });
+        const currentUser = {
+            _id: decodedToken.sub,
+            first_name: decodedToken.first_name,
+            last_name: decodedToken.last_name,
+            avatar: decodedToken.avatar,
+        };
+
+        set({ token, currentUser });
     },
 
     logout: async () => {
