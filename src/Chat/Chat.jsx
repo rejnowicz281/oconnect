@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { apiFetchChat } from "../../helpers/API";
+import { apiDeleteMessage, apiFetchChat } from "../../helpers/API";
+import { useAuthStore } from "../store";
 import MessageForm from "./MessageForm";
 
 import socket from "../socket";
 
 function Chat() {
+    const currentUser = useAuthStore((state) => state.currentUser);
     const { id } = useParams();
     const [chat, setChat] = useState(null);
 
@@ -22,6 +24,8 @@ function Chat() {
 
         return () => {
             socket.emit("leaveChat", id);
+            socket.off("addMessage");
+            socket.off("removeMessage");
         };
     }, [id]);
 
@@ -52,14 +56,17 @@ function Chat() {
     return (
         <div>
             <h1>Chat</h1>
-            <MessageForm />
             <ul>
                 {chat.messages.map((message) => (
                     <li key={message._id}>
                         {message.user.first_name} {message.user.last_name}: {message.text}
+                        {message.user._id == currentUser._id && (
+                            <button onClick={async () => await apiDeleteMessage(chat._id, message._id)}>Delete</button>
+                        )}
                     </li>
                 ))}
             </ul>
+            <MessageForm />
         </div>
     );
 }
