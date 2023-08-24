@@ -9,6 +9,7 @@ import Friends from "./Friends/Friends";
 import Received from "./Invites/Received";
 import MainLayout from "./Layout/MainLayout";
 import Posts from "./Posts/Posts";
+import User from "./Users/User";
 import Users from "./Users/Users";
 import { useAuthStore } from "./store";
 
@@ -65,10 +66,11 @@ function App() {
                     <Route element={<MainLayout />}>
                         <Route path="/*" element={<Navigate to="/friends" />} />
                         <Route path="/friends" element={<Friends />} />
-                        <Route path="/users" element={<Users />} />
                         <Route path="/invites/received" element={<Received />} />
                         <Route path="/chat/:id" element={<Chat />} />
                         <Route path="/posts" element={<Posts />} />
+                        <Route path="/users" element={<Users />} />
+                        <Route path="/users/:id" element={<User />} />
                     </Route>
                 ) : (
                     <Route element={<PersistLogin />}>

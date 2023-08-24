@@ -88,6 +88,16 @@ export async function apiFetchUsers() {
     }
 }
 
+export async function apiFetchUser(id) {
+    try {
+        const response = await apiAuth.get(`users/${id}`);
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function apiFetchFriends() {
     try {
         const response = await apiAuth.get("friendships");

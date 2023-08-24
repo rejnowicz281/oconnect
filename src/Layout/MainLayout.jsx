@@ -3,6 +3,7 @@ import { useAuthStore } from "../store";
 
 function MainLayout() {
     const logout = useAuthStore((state) => state.logout);
+    const currentUser = useAuthStore((state) => state.currentUser);
 
     return (
         <div>
@@ -10,6 +11,9 @@ function MainLayout() {
                 <ul>
                     <li>
                         <button onClick={logout}>Logout</button>
+                    </li>
+                    <li>
+                        <NavLink to={"/users/" + currentUser._id}>Profile</NavLink>
                     </li>
                     <li>
                         <NavLink to="/friends">Friends</NavLink>
