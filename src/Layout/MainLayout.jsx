@@ -20,9 +20,7 @@ function MainLayout() {
                     <li>
                         <NavLink to="/invites/received">Received Invites</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/invites/sent">Sent Invites</NavLink>
-                    </li>
+
                     <li>
                         <NavLink to="/posts">Posts</NavLink>
                     </li>

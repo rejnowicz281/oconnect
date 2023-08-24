@@ -120,16 +120,6 @@ export async function apiDeleteInvite(invite_id) {
     }
 }
 
-export async function apiFetchInvitesSent() {
-    try {
-        const response = await apiAuth.get("invites/sent");
-
-        return response;
-    } catch (error) {
-        return error.response;
-    }
-}
-
 export async function apiFetchInvitesReceived() {
     try {
         const response = await apiAuth.get("invites/received");

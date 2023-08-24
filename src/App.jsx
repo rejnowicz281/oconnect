@@ -7,7 +7,6 @@ import Register from "./Auth/Register";
 import Chat from "./Chat/Chat";
 import Friends from "./Friends/Friends";
 import Received from "./Invites/Received";
-import Sent from "./Invites/Sent";
 import MainLayout from "./Layout/MainLayout";
 import Posts from "./Posts/Posts";
 import Users from "./Users/Users";
@@ -68,7 +67,6 @@ function App() {
                         <Route path="/friends" element={<Friends />} />
                         <Route path="/users" element={<Users />} />
                         <Route path="/invites/received" element={<Received />} />
-                        <Route path="/invites/sent" element={<Sent />} />
                         <Route path="/chat/:id" element={<Chat />} />
                         <Route path="/posts" element={<Posts />} />
                     </Route>
