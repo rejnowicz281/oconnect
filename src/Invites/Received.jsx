@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiCreateFriendship, apiDeleteInvite, apiFetchInvitesReceived } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
+import AsyncButton from "../shared/AsyncButton";
 
 function Received() {
     const [invites, setInvites] = useState(null);
@@ -52,12 +53,17 @@ function Received() {
                 {invites.map((invite) => (
                     <li key={invite._id}>
                         <UserBox user={invite.inviter} />
-                        <button onClick={() => handleDeclineInvite(invite._id)} type="button">
-                            Decline Invite
-                        </button>
-                        <button onClick={async () => handleAcceptInvite(invite._id)} type="button">
-                            Accept Invite
-                        </button>
+                        <AsyncButton
+                            mainAction={() => handleDeclineInvite(invite._id)}
+                            text="Decline Invite"
+                            loadingText="Declining Invite..."
+                        />
+
+                        <AsyncButton
+                            mainAction={() => handleAcceptInvite(invite._id)}
+                            text="Accept Invite"
+                            loadingText="Accepting Invite..."
+                        />
                     </li>
                 ))}
             </ul>

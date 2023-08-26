@@ -14,13 +14,16 @@ function Register() {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [avatar, setAvatar] = useState(null);
     const [errors, setErrors] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const res = await apiRegister(email, firstName, lastName, password, passwordConfirm, avatar);
+        setLoading(false);
 
         if (res.status == 200) {
-            await login(res.data.access_token);
+            login(res.data.access_token);
         } else {
             setErrors(res.data.errors);
         }
@@ -86,13 +89,13 @@ function Register() {
                     <label htmlFor="avatar">Avatar</label>
                     <ImagePicker id="avatar" setImage={setAvatar} />
                 </div>
-                <button className="register-button" type="submit">
-                    Register
+                <button className="register-button" type="submit" disabled={loading}>
+                    {loading ? "Registering..." : "Register"}
                 </button>
             </form>
             <div className="auth-link-box">
                 <Link className="auth-link" to="/login">
-                    Login <div className="auth-link-arrow">→</div>
+                    Login <span className="auth-link-arrow">→</span>
                 </Link>
             </div>
         </div>

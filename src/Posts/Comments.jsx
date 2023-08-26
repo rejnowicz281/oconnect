@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { apiDeletePostComment, apiFetchPostComments } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
+import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 import CommentForm from "./CommentForm";
 
@@ -48,7 +49,11 @@ function Comments({ postId, isPostOwner }) {
                         <div>{comment.text}</div>
                         <div>{comment.createdAt}</div>
                         {(comment.user._id === currentUser._id || isPostOwner) && (
-                            <button onClick={() => handleDelete(comment._id)}>Delete</button>
+                            <AsyncButton
+                                mainAction={() => handleDelete(comment._id)}
+                                text="Delete"
+                                loadingText="Deleting..."
+                            />
                         )}
                     </div>
                 ))

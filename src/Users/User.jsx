@@ -9,6 +9,7 @@ import {
 } from "../../helpers/API";
 import Post from "../Posts/Post";
 import PostForm from "../Posts/PostForm";
+import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 import UserBox from "./UserBox";
 
@@ -120,23 +121,25 @@ function User() {
             {user.invited_me ? (
                 <div>
                     <h2>Invited me</h2>
-                    <button onClick={handleAcceptInvite} type="button">
-                        Accept Invite
-                    </button>
+                    <AsyncButton
+                        text="Accept invite"
+                        loadingText="Accepting invite..."
+                        mainAction={handleAcceptInvite}
+                    />
                 </div>
             ) : user.is_invited ? (
                 <div>
                     <h2>Is invited by me</h2>
-                    <button onClick={handleCancelInvite} type="button">
-                        Cancel invite
-                    </button>
+                    <AsyncButton
+                        text="Cancel invite"
+                        loadingText="Canceling invite..."
+                        mainAction={handleCancelInvite}
+                    />
                 </div>
             ) : user.friendship_id ? (
                 <div>
                     <h2>I am friends with him</h2>
-                    <button onClick={handleUnfriend} type="button">
-                        Unfriend
-                    </button>
+                    <AsyncButton text="Unfriend" loadingText="Unfriending..." mainAction={handleUnfriend} />
                 </div>
             ) : user.chat_id ? (
                 <div>
@@ -146,9 +149,7 @@ function User() {
             ) : (
                 <div>
                     <h2>Not friends</h2>
-                    <button onClick={handleInvite} type="button">
-                        Invite
-                    </button>
+                    <AsyncButton text="Invite" loadingText="Inviting..." mainAction={handleInvite} />
                 </div>
             )}
             <h2>Friends</h2>

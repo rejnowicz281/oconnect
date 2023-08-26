@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiDeleteFriendship, apiFetchFriends } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
-import { useAuthStore } from "../store";
+import AsyncButton from "../shared/AsyncButton";
 
 function Friends() {
-    const currentUser = useAuthStore((state) => state.currentUser);
     const [friends, setFriends] = useState(null);
 
     useEffect(() => {
@@ -25,6 +24,16 @@ function Friends() {
         };
     }, []);
 
+    async function handleUnfriend(friend) {
+        const res = await apiDeleteFriendship(friend.friendship_id);
+
+        if (res.status === 200) removeFriend(friend.info._id);
+    }
+
+    function removeFriend(friendId) {
+        setFriends((friends) => friends.filter((friend) => friend.info._id !== friendId));
+    }
+
     if (!friends) return <div>Loading...</div>;
 
     return (
@@ -35,9 +44,11 @@ function Friends() {
                     <li key={friend.info._id}>
                         <UserBox user={friend.info} />
                         <Link to={"/chats/" + friend.chat_id}>Chat</Link>
-                        <button onClick={async () => await apiDeleteFriendship(friend.friendship_id)} type="button">
-                            Unfriend
-                        </button>
+                        <AsyncButton
+                            mainAction={() => handleUnfriend(friend)}
+                            text="Unfriend"
+                            loadingText="Unfriending..."
+                        />
                     </li>
                 ))}
             </ul>

@@ -4,8 +4,9 @@ import { apiDeleteMessage, apiFetchChat } from "../../helpers/API";
 import { useAuthStore } from "../store";
 import MessageForm from "./MessageForm";
 
-import socket from "../socket";
 import UserBox from "../Users/UserBox";
+import AsyncButton from "../shared/AsyncButton";
+import socket from "../socket";
 
 function Chat() {
     const currentUser = useAuthStore((state) => state.currentUser);
@@ -65,7 +66,11 @@ function Chat() {
                     <li key={message._id}>
                         <UserBox user={message.user} /> {message.text}
                         {message.user._id == currentUser._id && (
-                            <button onClick={async () => await apiDeleteMessage(chat._id, message._id)}>Delete</button>
+                            <AsyncButton
+                                mainAction={() => apiDeleteMessage(chat._id, message._id)}
+                                text="Delete"
+                                loadingText="Deleting..."
+                            />
                         )}
                     </li>
                 ))}

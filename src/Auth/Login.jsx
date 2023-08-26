@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { apiDemoLogin, apiLogin } from "../../helpers/API";
+import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 
 function Login() {
@@ -10,10 +11,13 @@ function Login() {
     const [password, setPassword] = useState("");
     const [persist, setPersist] = useState(true);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const res = await apiLogin(email, password);
+        setLoading(false);
 
         handleLoginResponse(res);
     };
@@ -66,13 +70,11 @@ function Login() {
                     />
                     <label htmlFor="remember-me">Remember me</label>
                 </div>
-                <button className="login-button" type="submit">
-                    Log In
+                <button className="login-button" type="submit" disabled={loading}>
+                    {loading ? "Logging in..." : "Login"}
                 </button>
             </form>
-            <button onClick={handleDemoLogin} type="button">
-                Demo Login
-            </button>
+            <AsyncButton text="Demo Login" loadingText="Logging in..." mainAction={handleDemoLogin} />
             <div className="auth-link-box">
                 <Link to="/register" className="auth-link">
                     Register <span className="auth-link-arrow">→</span>

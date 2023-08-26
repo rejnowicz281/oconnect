@@ -7,10 +7,13 @@ function PostForm({ addPost }) {
     const [text, setText] = useState("");
     const [photo, setPhoto] = useState(null);
     const [errors, setErrors] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setLoading(true);
         const res = await apiCreatePost(text, photo);
+        setLoading(false);
 
         if (res.status === 201) {
             addPost(res.data.post);
@@ -38,7 +41,9 @@ function PostForm({ addPost }) {
                 <label htmlFor="photo">Attach a photo</label>
                 <ImagePicker id="photo" setImage={setPhoto} />
             </div>
-            <button type="submit">Post</button>
+            <button disabled={loading} type="submit">
+                {loading ? "Posting..." : "Post"}
+            </button>
         </form>
     );
 }

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { apiDeletePost, apiLikePost } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
+import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 import Comments from "./Comments";
 
@@ -68,17 +69,15 @@ function Post({ initialPost, deletePost }) {
         <div>
             <UserBox user={post.user} />
             <h3>{post.text}</h3>
-            {isPostOwner && (
-                <button onClick={handleDelete} type="button">
-                    Delete
-                </button>
-            )}
+            {isPostOwner && <AsyncButton mainAction={handleDelete} text="Delete" loadingText="Deleting..." />}
             {post.photo && <img height="300" width="300" src={post.photo.url} />}
             <div>{post.likes.length} Likes</div>
             <div>{post.createdAt}</div>
-            <button onClick={handleLike} type="button">
-                {liked ? "Unlike" : "Like"}
-            </button>
+            <AsyncButton
+                mainAction={handleLike}
+                text={liked ? "Unlike" : "Like"}
+                loadingText={liked ? "Unliking..." : "Liking..."}
+            />
             <button onClick={toggleComments} type="button">
                 Comments
             </button>

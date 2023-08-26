@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiCreateInvite, apiDeleteInvite, apiFetchUsers } from "../../helpers/API";
+import AsyncButton from "../shared/AsyncButton";
 import UserBox from "./UserBox";
 
 function Users() {
@@ -53,9 +54,17 @@ function Users() {
                     <li key={user._id}>
                         <UserBox user={user} />
                         {user.invite_id ? (
-                            <button onClick={() => handleCancelInvite(user._id, user.invite_id)}>Cancel Invite</button>
+                            <AsyncButton
+                                text="Cancel Invite"
+                                loadingText="Cancelling Invite..."
+                                mainAction={() => handleCancelInvite(user._id, user.invite_id)}
+                            />
                         ) : (
-                            <button onClick={() => handleSendInvite(user._id)}>Send Invite</button>
+                            <AsyncButton
+                                text="Send Invite"
+                                loadingText="Sending Invite..."
+                                mainAction={() => handleSendInvite(user._id)}
+                            />
                         )}
                     </li>
                 ))}
