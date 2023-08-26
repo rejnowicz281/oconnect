@@ -203,3 +203,21 @@ export async function apiFetchPosts() {
         return error.response;
     }
 }
+
+export async function apiCreatePost(text, photo) {
+    try {
+        const formData = new FormData();
+        formData.append("text", text);
+        formData.append("photo", photo);
+
+        const response = await apiAuth.post("posts", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
