@@ -51,7 +51,7 @@ function User() {
             <h2>Posts</h2>
             {user._id === currentUser._id && <PostForm addPost={addPost} />}
             {user.posts.map((post) => (
-                <Post key={post._id} post={post} />
+                <Post key={post._id} initialPost={post} />
             ))}
         </div>
     );

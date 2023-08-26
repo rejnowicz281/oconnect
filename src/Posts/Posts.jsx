@@ -27,7 +27,7 @@ function Posts() {
     return (
         <div>
             <PostForm addPost={addPost} />
-            {posts && posts.map((post) => <Post key={post._id} post={post} />)}
+            {posts && posts.map((post) => <Post key={post._id} initialPost={post} />)}
         </div>
     );
 }
