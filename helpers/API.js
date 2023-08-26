@@ -221,3 +221,13 @@ export async function apiCreatePost(text, photo) {
         return error.response;
     }
 }
+
+export async function apiLikePost(post_id) {
+    try {
+        const response = await apiAuth.patch(`posts/${post_id}/like`);
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
