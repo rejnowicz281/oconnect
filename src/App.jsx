@@ -67,7 +67,7 @@ function App() {
                         <Route path="/*" element={<Navigate to="/friends" />} />
                         <Route path="/friends" element={<Friends />} />
                         <Route path="/invites/received" element={<Received />} />
-                        <Route path="/chat/:id" element={<Chat />} />
+                        <Route path="/chats/:id" element={<Chat />} />
                         <Route path="/posts" element={<Posts />} />
                         <Route path="/users" element={<Users />} />
                         <Route path="/users/:id" element={<User />} />

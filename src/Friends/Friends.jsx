@@ -34,7 +34,7 @@ function Friends() {
                 {friends.map((friend) => (
                     <li key={friend.info._id}>
                         <UserBox user={friend.info} />
-                        <Link to={"/chat/" + friend.chat_id}>Chat</Link>
+                        <Link to={"/chats/" + friend.chat_id}>Chat</Link>
                         <button onClick={async () => await apiDeleteFriendship(friend.friendship_id)} type="button">
                             Unfriend
                         </button>
