@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { apiCreateInvite, apiDeleteInvite, apiFetchUsers } from "../../helpers/API";
+import UserBox from "./UserBox";
 
 function Users() {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -15,6 +16,10 @@ function Users() {
         };
 
         fetchUsers();
+
+        return () => {
+            setUsers(null);
+        };
     }, []);
 
     async function setInviteId(userId, inviteId) {
@@ -38,13 +43,15 @@ function Users() {
         if (res.status === 200) setInviteId(userId, null);
     }
 
+    if (!users) return <div>Loading...</div>;
+
     return (
         <div>
             <h1>Users</h1>
             <ul>
                 {users.map((user) => (
                     <li key={user._id}>
-                        {user.first_name} {user.last_name}
+                        <UserBox user={user} />
                         {user.invite_id ? (
                             <button onClick={() => handleCancelInvite(user._id, user.invite_id)}>Cancel Invite</button>
                         ) : (

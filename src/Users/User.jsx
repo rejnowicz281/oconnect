@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { apiFetchUser } from "../../helpers/API";
+import Post from "../Posts/Post";
+import PostForm from "../Posts/PostForm";
+import { useAuthStore } from "../store";
+import UserBox from "./UserBox";
 
 function User() {
+    const currentUser = useAuthStore((state) => state.currentUser);
+
     const { id } = useParams();
     const [user, setUser] = useState(null);
 
@@ -16,7 +22,15 @@ function User() {
         };
 
         fetchUser();
-    }, []);
+
+        return () => {
+            setUser(null);
+        };
+    }, [id]);
+
+    function addPost(post) {
+        setUser((user) => ({ ...user, posts: [post, ...user.posts] }));
+    }
 
     if (!user) return <div>Loading...</div>;
 
@@ -28,20 +42,16 @@ function User() {
             <h2>Friends</h2>
             <ul>
                 {user.friends.map((friend) => (
-                    <li key={friend.id}>
-                        <Link to={"/users/" + friend._id}>
-                            {friend.first_name} {friend.last_name}
-                        </Link>
+                    <li key={friend._id}>
+                        <UserBox user={friend} />
                     </li>
                 ))}
             </ul>
 
             <h2>Posts</h2>
+            {user._id === currentUser._id && <PostForm addPost={addPost} />}
             {user.posts.map((post) => (
-                <div key={post.id}>
-                    <p>{post.text}</p>
-                    <p>{post.likes.length}</p>
-                </div>
+                <Post key={post._id} post={post} />
             ))}
         </div>
     );

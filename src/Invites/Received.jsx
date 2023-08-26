@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { apiCreateFriendship, apiDeleteInvite, apiFetchInvitesReceived } from "../../helpers/API";
+import UserBox from "../Users/UserBox";
 
 function Received() {
-    const [invites, setInvites] = useState([]);
+    const [invites, setInvites] = useState(null);
 
     useEffect(() => {
         const fetchInvites = async () => {
@@ -15,6 +16,10 @@ function Received() {
         };
 
         fetchInvites();
+
+        return () => {
+            setInvites(null);
+        };
     }, []);
 
     async function deleteInvite(inviteId) {
@@ -38,13 +43,15 @@ function Received() {
         if (res.status === 201) deleteInvite(inviteId);
     }
 
+    if (!invites) return <div>Loading...</div>;
+
     return (
         <div>
             <h1>Received Invites</h1>
             <ul>
                 {invites.map((invite) => (
                     <li key={invite._id}>
-                        {invite.inviter.first_name} {invite.inviter.last_name}
+                        <UserBox user={invite.inviter} />
                         <button onClick={() => handleDeclineInvite(invite._id)} type="button">
                             Decline Invite
                         </button>

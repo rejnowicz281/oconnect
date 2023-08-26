@@ -5,6 +5,7 @@ import { useAuthStore } from "../store";
 import MessageForm from "./MessageForm";
 
 import socket from "../socket";
+import UserBox from "../Users/UserBox";
 
 function Chat() {
     const currentUser = useAuthStore((state) => state.currentUser);
@@ -62,7 +63,7 @@ function Chat() {
             <ul>
                 {chat.messages.map((message) => (
                     <li key={message._id}>
-                        {message.user.first_name} {message.user.last_name}: {message.text}
+                        <UserBox user={message.user} /> {message.text}
                         {message.user._id == currentUser._id && (
                             <button onClick={async () => await apiDeleteMessage(chat._id, message._id)}>Delete</button>
                         )}

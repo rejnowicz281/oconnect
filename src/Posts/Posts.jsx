@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiFetchPosts } from "../../helpers/API";
+import Post from "./Post";
+import PostForm from "./PostForm";
 
 function Posts() {
     const [posts, setPosts] = useState(null);
@@ -10,23 +12,22 @@ function Posts() {
             setPosts(res.data.posts);
         }
         fetchPosts();
+
+        return () => {
+            setPosts(null);
+        };
     }, []);
+
+    function addPost(post) {
+        setPosts((posts) => [post, ...posts]);
+    }
 
     if (!posts) return <div>Loading...</div>;
 
     return (
         <div>
-            {posts &&
-                posts.map((post) => (
-                    <div key={post._id}>
-                        <h3>{post.text}</h3>
-                        <p>
-                            {post.user.first_name} {post.user.last_name}
-                        </p>
-                        <div>{post.likes.length} Likes</div>
-                        <div>{post.createdAt}</div>
-                    </div>
-                ))}
+            <PostForm addPost={addPost} />
+            {posts && posts.map((post) => <Post key={post._id} post={post} />)}
         </div>
     );
 }
