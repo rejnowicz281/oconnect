@@ -231,3 +231,13 @@ export async function apiLikePost(post_id) {
         return error.response;
     }
 }
+
+export async function apiFetchPostComments(post_id) {
+    try {
+        const response = await apiAuth.get(`posts/${post_id}/comments`);
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}

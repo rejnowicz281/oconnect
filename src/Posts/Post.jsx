@@ -3,12 +3,21 @@ import { useEffect, useState } from "react";
 import { apiLikePost } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
 import { useAuthStore } from "../store";
+import Comments from "./Comments";
 
 function Post({ initialPost }) {
     const currentUser = useAuthStore((state) => state.currentUser);
 
     const [post, setPost] = useState(initialPost);
     const [liked, setLiked] = useState(false);
+    const [showComments, setShowComments] = useState(false);
+
+    useEffect(() => {
+        return () => {
+            setLiked(false);
+            setShowComments(false);
+        };
+    }, []);
 
     useEffect(() => {
         if (post.likes.includes(currentUser._id)) setLiked(true);
@@ -26,6 +35,10 @@ function Post({ initialPost }) {
             if (post.likes.includes(currentUser._id)) removeLike();
             else addLike();
         }
+    }
+
+    async function toggleComments() {
+        setShowComments((showComments) => !showComments);
     }
 
     function addLike() {
@@ -49,6 +62,10 @@ function Post({ initialPost }) {
             <button onClick={handleLike} type="button">
                 {liked ? "Unlike" : "Like"}
             </button>
+            <button onClick={toggleComments} type="button">
+                Comments
+            </button>
+            {showComments && <Comments postId={post._id} />}
         </div>
     );
 }
