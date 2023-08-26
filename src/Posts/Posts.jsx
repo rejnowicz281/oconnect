@@ -22,12 +22,16 @@ function Posts() {
         setPosts((posts) => [post, ...posts]);
     }
 
+    function deletePost(postId) {
+        setPosts((posts) => posts.filter((post) => post._id !== postId));
+    }
+
     if (!posts) return <div>Loading...</div>;
 
     return (
         <div>
             <PostForm addPost={addPost} />
-            {posts && posts.map((post) => <Post key={post._id} initialPost={post} />)}
+            {posts && posts.map((post) => <Post deletePost={deletePost} key={post._id} initialPost={post} />)}
         </div>
     );
 }

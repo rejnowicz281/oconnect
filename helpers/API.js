@@ -222,6 +222,16 @@ export async function apiCreatePost(text, photo) {
     }
 }
 
+export async function apiDeletePost(post_id) {
+    try {
+        const response = await apiAuth.delete(`posts/${post_id}`);
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function apiLikePost(post_id) {
     try {
         const response = await apiAuth.patch(`posts/${post_id}/like`);
@@ -235,6 +245,28 @@ export async function apiLikePost(post_id) {
 export async function apiFetchPostComments(post_id) {
     try {
         const response = await apiAuth.get(`posts/${post_id}/comments`);
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function apiCreatePostComment(post_id, text) {
+    try {
+        const response = await apiAuth.post(`posts/${post_id}/comments`, {
+            text,
+        });
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function apiDeletePostComment(post_id, comment_id) {
+    try {
+        const response = await apiAuth.delete(`posts/${post_id}/comments/${comment_id}`);
 
         return response;
     } catch (error) {

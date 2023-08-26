@@ -32,6 +32,10 @@ function User() {
         setUser((user) => ({ ...user, posts: [post, ...user.posts] }));
     }
 
+    function deletePost(postId) {
+        setUser((user) => ({ ...user, posts: user.posts.filter((post) => post._id !== postId) }));
+    }
+
     if (!user) return <div>Loading...</div>;
 
     return (
@@ -47,11 +51,10 @@ function User() {
                     </li>
                 ))}
             </ul>
-
             <h2>Posts</h2>
             {user._id === currentUser._id && <PostForm addPost={addPost} />}
             {user.posts.map((post) => (
-                <Post key={post._id} initialPost={post} />
+                <Post deletePost={deletePost} key={post._id} initialPost={post} />
             ))}
         </div>
     );
