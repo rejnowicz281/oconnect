@@ -222,6 +222,24 @@ export async function apiCreatePost(text, photo) {
     }
 }
 
+export async function apiUpdatePost(post_id, text, photo) {
+    try {
+        const formData = new FormData();
+        formData.append("text", text);
+        formData.append("photo", photo);
+
+        const response = await apiAuth.put(`posts/${post_id}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function apiDeletePost(post_id) {
     try {
         const response = await apiAuth.delete(`posts/${post_id}`);

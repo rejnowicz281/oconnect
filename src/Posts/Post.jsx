@@ -5,6 +5,7 @@ import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 import Comments from "./Comments";
+import EditPostForm from "./EditPostForm";
 
 function Post({ initialPost, deletePost }) {
     const currentUser = useAuthStore((state) => state.currentUser);
@@ -13,6 +14,7 @@ function Post({ initialPost, deletePost }) {
     const [liked, setLiked] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const [isPostOwner, setIsPostOwner] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         if (post.user._id === currentUser._id) setIsPostOwner(true);
@@ -67,12 +69,24 @@ function Post({ initialPost, deletePost }) {
 
     return (
         <div>
-            <UserBox user={post.user} />
-            <h3>{post.text}</h3>
-            {isPostOwner && <AsyncButton mainAction={handleDelete} text="Delete" loadingText="Deleting..." />}
-            {post.photo && <img height="300" width="300" src={post.photo.url} />}
-            <div>{post.likes.length} Likes</div>
-            <div>{post.createdAt}</div>
+            <hr />
+            {editMode ? (
+                <EditPostForm post={post} setPost={setPost} setEditMode={setEditMode} />
+            ) : (
+                <>
+                    <UserBox user={post.user} />
+                    <h3>{post.text}</h3>
+                    {isPostOwner && <AsyncButton mainAction={handleDelete} text="Delete" loadingText="Deleting..." />}
+                    {isPostOwner && (
+                        <button onClick={() => setEditMode((editMode) => !editMode)} type="button">
+                            Edit
+                        </button>
+                    )}
+                    {post.photo && <img height="300" width="300" src={post.photo.url} />}
+                    <div>{post.likes.length} Likes</div>
+                    <div>{post.createdAt}</div>
+                </>
+            )}
             <AsyncButton
                 mainAction={handleLike}
                 text={liked ? "Unlike" : "Like"}

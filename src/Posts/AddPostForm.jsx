@@ -3,7 +3,7 @@ import { useState } from "react";
 import { apiCreatePost } from "../../helpers/API";
 import ImagePicker from "../shared/ImagePicker";
 
-function PostForm({ addPost }) {
+function AddPostForm({ addPost }) {
     const [text, setText] = useState("");
     const [photo, setPhoto] = useState(null);
     const [errors, setErrors] = useState([]);
@@ -48,8 +48,8 @@ function PostForm({ addPost }) {
     );
 }
 
-PostForm.propTypes = {
+AddPostForm.propTypes = {
     addPost: PropTypes.func.isRequired,
 };
 
-export default PostForm;
+export default AddPostForm;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiFetchPosts } from "../../helpers/API";
+import AddPostForm from "./AddPostForm";
 import Post from "./Post";
-import PostForm from "./PostForm";
 
 function Posts() {
     const [posts, setPosts] = useState(null);
@@ -30,7 +30,8 @@ function Posts() {
 
     return (
         <div>
-            <PostForm addPost={addPost} />
+            <AddPostForm addPost={addPost} />
+            {console.log(posts)}
             {posts && posts.map((post) => <Post deletePost={deletePost} key={post._id} initialPost={post} />)}
         </div>
     );
