@@ -11,6 +11,7 @@ import AddPostForm from "../Posts/AddPostForm";
 import Post from "../Posts/Post";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
+import UpdateAvatar from "./UpdateAvatar";
 import UserBox from "./UserBox";
 
 function User() {
@@ -20,14 +21,6 @@ function User() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const response = await apiFetchUser(id);
-
-            if (response.status === 200) {
-                setUser(response.data.user);
-            }
-        };
-
         fetchUser();
 
         return () => {
@@ -35,12 +28,13 @@ function User() {
         };
     }, [id]);
 
-    function addPost(post) {
-        setUser((user) => ({ ...user, posts: [post, ...user.posts] }));
-    }
+    async function fetchUser() {
+        setUser(null);
+        const response = await apiFetchUser(id);
 
-    function deletePost(postId) {
-        setUser((user) => ({ ...user, posts: user.posts.filter((post) => post._id !== postId) }));
+        if (response.status === 200) {
+            setUser(response.data.user);
+        }
     }
 
     async function handleAcceptInvite() {
@@ -83,6 +77,14 @@ function User() {
         }
     }
 
+    function addPost(post) {
+        setUser((user) => ({ ...user, posts: [post, ...user.posts] }));
+    }
+
+    function deletePost(postId) {
+        setUser((user) => ({ ...user, posts: user.posts.filter((post) => post._id !== postId) }));
+    }
+
     function addFriend(friend) {
         setUser((user) => ({ ...user, friends: [friend, ...user.friends] }));
     }
@@ -118,6 +120,8 @@ function User() {
             <h1>
                 {user.first_name} {user.last_name}
             </h1>
+            <img src={user.avatar.url} alt="" />
+            {user._id === currentUser._id && <UpdateAvatar onSuccess={fetchUser} />}
             {user.invited_me ? (
                 <div>
                     <h2>Invited me</h2>

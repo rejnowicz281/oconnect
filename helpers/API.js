@@ -291,3 +291,20 @@ export async function apiDeletePostComment(post_id, comment_id) {
         return error.response;
     }
 }
+
+export async function apiUpdateAvatar(avatar) {
+    try {
+        const formData = new FormData();
+        formData.append("avatar", avatar);
+
+        const response = await apiAuth.patch("avatar", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
