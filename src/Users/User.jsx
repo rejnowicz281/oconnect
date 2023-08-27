@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
     apiCreateFriendship,
     apiCreateInvite,
@@ -17,6 +17,7 @@ import UserBox from "./UserBox";
 function User() {
     const currentUser = useAuthStore((state) => state.currentUser);
 
+    const navigate = useNavigate();
     const { id } = useParams();
     const [user, setUser] = useState(null);
 
@@ -34,6 +35,8 @@ function User() {
 
         if (response.status === 200) {
             setUser(response.data.user);
+        } else {
+            navigate("/");
         }
     }
 
