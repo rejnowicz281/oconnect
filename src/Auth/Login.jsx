@@ -1,6 +1,7 @@
+import FacebookLogin from "@greatsumini/react-facebook-login";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { apiDemoLogin, apiLogin } from "../../helpers/API";
+import { apiDemoLogin, apiFacebookLogin, apiLogin } from "../../helpers/API";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 
@@ -35,6 +36,12 @@ function Login() {
         } else {
             setError(res.data.message);
         }
+    }
+
+    async function handleFacebookResponse(res) {
+        const loginResponse = await apiFacebookLogin(res.accessToken);
+
+        handleLoginResponse(loginResponse);
     }
 
     return (
@@ -73,6 +80,15 @@ function Login() {
                 <button className="login-button" type="submit" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                 </button>
+                <FacebookLogin
+                    appId="1698868573947034"
+                    autoLoad={false}
+                    initParams={{
+                        version: "v17.0",
+                    }}
+                    fields="name,picture"
+                    onSuccess={handleFacebookResponse}
+                />
             </form>
             <AsyncButton text="Demo Login" loadingText="Logging in..." mainAction={handleDemoLogin} />
             <div className="auth-link-box">

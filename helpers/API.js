@@ -36,6 +36,18 @@ export async function apiDemoLogin() {
     }
 }
 
+export async function apiFacebookLogin(access_token) {
+    try {
+        const response = await api.post("facebook", {
+            access_token,
+        });
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function apiRegister(email, first_name, last_name, password, password_confirm, avatar) {
     try {
         const formData = new FormData();
