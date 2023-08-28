@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { apiDemoLogin, apiFacebookLogin, apiLogin } from "../../helpers/API";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
+import cssAuth from "./styles/Auth.module.css";
+import cssLogin from "./styles/Login.module.css";
 
 function Login() {
     const login = useAuthStore((state) => state.login);
@@ -45,41 +47,44 @@ function Login() {
     }
 
     return (
-        <div className="auth-box">
-            {error && <div>{error}</div>}
-            <form className="auth-form" onSubmit={handleSubmit}>
-                <div className="form-field">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div className="form-field">
-                    <input
-                        onChange={(e) => setPersist(e.target.checked)}
-                        checked={persist}
-                        type="checkbox"
-                        id="remember-me"
-                    />
-                    <label htmlFor="remember-me">Remember me</label>
-                </div>
-                <button className="login-button" type="submit" disabled={loading}>
-                    {loading ? "Logging in..." : "Login"}
-                </button>
+        <div className={cssAuth.wrapper}>
+            <div className={cssAuth.container}>
+                <h1 className={cssAuth.heading}>Login</h1>
+                {error && <div className={cssLogin.error}>{error}</div>}
+                <form onSubmit={handleSubmit}>
+                    <div className={cssAuth["form-field"]}>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className={cssAuth["form-field"]}>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className={cssLogin["remember-me-field"]}>
+                        <input
+                            onChange={(e) => setPersist(e.target.checked)}
+                            checked={persist}
+                            type="checkbox"
+                            id="remember-me"
+                        />
+                        <label htmlFor="remember-me">Remember me</label>
+                    </div>
+                    <button className={cssAuth.continue} type="submit" disabled={loading}>
+                        {loading ? "Logging in..." : "Continue"}
+                    </button>
+                </form>
                 <FacebookLogin
                     appId="1698868573947034"
                     autoLoad={false}
@@ -88,13 +93,17 @@ function Login() {
                     }}
                     fields="name,picture"
                     onSuccess={handleFacebookResponse}
+                    className={cssLogin["facebook-login"]}
                 />
-            </form>
-            <AsyncButton text="Demo Login" loadingText="Logging in..." mainAction={handleDemoLogin} />
-            <div className="auth-link-box">
-                <Link to="/register" className="auth-link">
-                    Register <span className="auth-link-arrow">→</span>
-                </Link>
+                <AsyncButton
+                    className={cssLogin["demo-login"]}
+                    text="Demo Login"
+                    loadingText="Logging in..."
+                    mainAction={handleDemoLogin}
+                />
+                <div className={cssAuth["auth-link-container"]}>
+                    Don't have an account? <Link to="/register">Register</Link>
+                </div>
             </div>
         </div>
     );

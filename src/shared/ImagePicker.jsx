@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import styles from "./styles/ImagePicker.module.css";
 
 function ImagePicker({ setImage, id }) {
     const [imageIsSet, setImageIsSet] = useState(false);
@@ -16,13 +17,13 @@ function ImagePicker({ setImage, id }) {
     }
 
     return (
-        <div className="image-picker-box">
+        <div className={styles.container}>
+            <input className={styles.input} type="file" id={id} onChange={handleImageChange} />
             {imageIsSet && (
-                <button className="cancel-image-button" type="button" onClick={handleCancelImage}>
+                <button className={styles.cancel} type="button" onClick={handleCancelImage}>
                     ☓
                 </button>
             )}
-            <input className="image-picker" type="file" id={id} onChange={handleImageChange} />
         </div>
     );
 }
