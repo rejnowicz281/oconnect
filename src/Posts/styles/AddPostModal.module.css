@@ -1,0 +1,17 @@
+.show-modal {
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 15px;
+    text-align: start;
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    color: #495057;
+    background-color: #fff;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.show-modal:hover {
+    background: rgb(231, 231, 231);
+}

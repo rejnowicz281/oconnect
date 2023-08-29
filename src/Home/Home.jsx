@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiFetchPosts } from "../../helpers/API";
-import AddPostForm from "../Posts/AddPostForm";
+import AddPostModal from "../Posts/AddPostModal";
 import Post from "../Posts/Post";
 import PageLoading from "../shared/PageLoading";
 
@@ -31,7 +31,7 @@ function Home() {
 
     return (
         <div>
-            <AddPostForm addPost={addPost} />
+            <AddPostModal addPost={addPost} />
             {posts && posts.map((post) => <Post deletePost={deletePost} key={post._id} initialPost={post} />)}
         </div>
     );

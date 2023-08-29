@@ -7,7 +7,7 @@ import {
     apiDeleteInvite,
     apiFetchUser,
 } from "../../helpers/API";
-import AddPostForm from "../Posts/AddPostForm";
+import AddPostModal from "../Posts/AddPostModal";
 import Post from "../Posts/Post";
 import AsyncButton from "../shared/AsyncButton";
 import PageLoading from "../shared/PageLoading";
@@ -169,7 +169,7 @@ function User() {
                 ))}
             </ul>
             <h2>Posts</h2>
-            {user._id === currentUser._id && <AddPostForm addPost={addPost} />}
+            {user._id === currentUser._id && <AddPostModal addPost={addPost} />}
             {user.posts.map((post) => (
                 <Post deletePost={deletePost} key={post._id} initialPost={post} />
             ))}
