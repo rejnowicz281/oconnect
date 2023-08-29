@@ -1,9 +1,9 @@
-import FacebookLogin from "@greatsumini/react-facebook-login";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { apiDemoLogin, apiFacebookLogin, apiLogin } from "../../helpers/API";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
+import FacebookLoginButton from "./FacebookLoginButton";
 import cssAuth from "./styles/Auth.module.css";
 import cssLogin from "./styles/Login.module.css";
 
@@ -85,16 +85,7 @@ function Login() {
                         {loading ? "Logging in..." : "Continue"}
                     </button>
                 </form>
-                <FacebookLogin
-                    appId="1698868573947034"
-                    autoLoad={false}
-                    initParams={{
-                        version: "v17.0",
-                    }}
-                    fields="name,picture"
-                    onSuccess={handleFacebookResponse}
-                    className={cssLogin["facebook-login"]}
-                />
+                <FacebookLoginButton onSuccess={handleFacebookResponse} />
                 <AsyncButton
                     className={cssLogin["demo-login"]}
                     text="Demo Login"
