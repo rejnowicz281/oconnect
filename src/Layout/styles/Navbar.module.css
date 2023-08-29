@@ -1,0 +1,71 @@
+.toggle,
+.logout {
+    background-color: inherit;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+}
+
+.logout {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transition: 0.2s;
+}
+
+.logout:hover {
+    color: red;
+}
+
+.nav {
+    font-size: 30px;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #d3cce3, #e9e4f0);
+    z-index: 1;
+    transition: 0.5s;
+}
+
+.open {
+    left: 0;
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.list > li {
+    text-transform: uppercase;
+    list-style: none;
+    margin: 20px 0;
+}
+
+.list > li > a {
+    text-decoration: none;
+    color: #262626;
+    transition: 0.2s;
+}
+
+.list > li > a.active {
+    color: #7d7f8b;
+}
+
+.list > li > a:hover {
+    color: #949494;
+}
