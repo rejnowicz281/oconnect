@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { apiDeleteFriendship, apiFetchFriends } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
+import PageLoading from "../shared/PageLoading";
 
 function Friends() {
     const [friends, setFriends] = useState(null);
@@ -34,7 +35,7 @@ function Friends() {
         setFriends((friends) => friends.filter((friend) => friend.info._id !== friendId));
     }
 
-    if (!friends) return <div>Loading...</div>;
+    if (!friends) return <PageLoading />;
 
     return (
         <div>

@@ -6,6 +6,7 @@ import MessageForm from "./MessageForm";
 
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
+import PageLoading from "../shared/PageLoading";
 import socket from "../socket";
 
 function Chat() {
@@ -56,7 +57,7 @@ function Chat() {
         }));
     }
 
-    if (!chat) return <div> Loading... </div>;
+    if (!chat) return <PageLoading />;
 
     return (
         <div>

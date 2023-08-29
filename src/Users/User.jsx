@@ -10,6 +10,7 @@ import {
 import AddPostForm from "../Posts/AddPostForm";
 import Post from "../Posts/Post";
 import AsyncButton from "../shared/AsyncButton";
+import PageLoading from "../shared/PageLoading";
 import { useAuthStore } from "../store";
 import UpdateAvatar from "./UpdateAvatar";
 import UserBox from "./UserBox";
@@ -116,7 +117,7 @@ function User() {
         setUser((user) => ({ ...user, invite_id: inviteId }));
     }
 
-    if (!user) return <div>Loading...</div>;
+    if (!user) return <PageLoading />;
 
     return (
         <div>

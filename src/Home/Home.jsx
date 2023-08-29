@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiFetchPosts } from "../../helpers/API";
 import AddPostForm from "../Posts/AddPostForm";
 import Post from "../Posts/Post";
+import PageLoading from "../shared/PageLoading";
 
 function Home() {
     const [posts, setPosts] = useState(null);
@@ -26,7 +27,7 @@ function Home() {
         setPosts((posts) => posts.filter((post) => post._id !== postId));
     }
 
-    if (!posts) return <div>Loading...</div>;
+    if (!posts) return <PageLoading />;
 
     return (
         <div>

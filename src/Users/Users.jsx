@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiCreateInvite, apiDeleteInvite, apiFetchUsers } from "../../helpers/API";
 import AsyncButton from "../shared/AsyncButton";
+import PageLoading from "../shared/PageLoading";
 import UserBox from "./UserBox";
 
 function Users() {
@@ -44,7 +45,7 @@ function Users() {
         if (res.status === 200) setInviteId(userId, null);
     }
 
-    if (!users) return <div>Loading...</div>;
+    if (!users) return <PageLoading />;
 
     return (
         <div>

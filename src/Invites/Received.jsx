@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiCreateFriendship, apiDeleteInvite, apiFetchInvitesReceived } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
+import PageLoading from "../shared/PageLoading";
 
 function Received() {
     const [invites, setInvites] = useState(null);
@@ -44,7 +45,7 @@ function Received() {
         if (res.status === 201) deleteInvite(inviteId);
     }
 
-    if (!invites) return <div>Loading...</div>;
+    if (!invites) return <PageLoading />;
 
     return (
         <div>
