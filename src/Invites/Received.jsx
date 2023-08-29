@@ -3,6 +3,7 @@ import { apiCreateFriendship, apiDeleteInvite, apiFetchInvitesReceived } from ".
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
 import PageLoading from "../shared/PageLoading";
+import css from "./Received.module.css";
 
 function Received() {
     const [invites, setInvites] = useState(null);
@@ -49,25 +50,22 @@ function Received() {
 
     return (
         <div>
-            <h1>Received Invites</h1>
-            <ul>
-                {invites.map((invite) => (
-                    <li key={invite._id}>
-                        <UserBox user={invite.inviter} />
-                        <AsyncButton
-                            mainAction={() => handleDeclineInvite(invite._id)}
-                            text="Decline Invite"
-                            loadingText="Declining Invite..."
-                        />
+            {invites.map((invite) => (
+                <div className={css["user-box"]} key={invite._id}>
+                    <UserBox user={invite.inviter} />
+                    <AsyncButton
+                        mainAction={() => handleDeclineInvite(invite._id)}
+                        text="Decline Invite"
+                        loadingText="Declining Invite..."
+                    />
 
-                        <AsyncButton
-                            mainAction={() => handleAcceptInvite(invite._id)}
-                            text="Accept Invite"
-                            loadingText="Accepting Invite..."
-                        />
-                    </li>
-                ))}
-            </ul>
+                    <AsyncButton
+                        mainAction={() => handleAcceptInvite(invite._id)}
+                        text="Accept Invite"
+                        loadingText="Accepting Invite..."
+                    />
+                </div>
+            ))}
         </div>
     );
 }
