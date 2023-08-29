@@ -1,0 +1,26 @@
+.header {
+    text-align: center;
+}
+
+.header > img {
+    border-radius: 50%;
+}
+
+.association {
+    text-align: center;
+}
+
+.assoc-button {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.chat:hover {
+    color: blueviolet;
+}

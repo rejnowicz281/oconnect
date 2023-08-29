@@ -14,6 +14,7 @@ import PageLoading from "../shared/PageLoading";
 import { useAuthStore } from "../store";
 import UpdateAvatar from "./UpdateAvatar";
 import UserBox from "./UserBox";
+import css from "./styles/User.module.css";
 
 function User() {
     const currentUser = useAuthStore((state) => state.currentUser);
@@ -121,54 +122,69 @@ function User() {
 
     return (
         <div>
-            <h1>
-                {user.first_name} {user.last_name}
-            </h1>
-            <img src={user.avatar.url} alt="" />
-            {user._id === currentUser._id && <UpdateAvatar onSuccess={fetchUser} />}
-            {user.invited_me ? (
-                <div>
-                    <h2>Invited me</h2>
+            <div className={css.header}>
+                <h1>
+                    {user.first_name} {user.last_name}
+                </h1>
+                <img src={user.avatar.url} alt="" />
+            </div>
+            {user._id === currentUser._id ? (
+                <div className={css.association}>
+                    <h2>This is me.</h2>
+                    <UpdateAvatar onSuccess={fetchUser} />
+                </div>
+            ) : user.invited_me ? (
+                <div className={css.association}>
+                    <h2>Invited me.</h2>
                     <AsyncButton
+                        className={css["assoc-button"]}
                         text="Accept invite"
                         loadingText="Accepting invite..."
                         mainAction={handleAcceptInvite}
                     />
                 </div>
             ) : user.is_invited ? (
-                <div>
-                    <h2>Is invited by me</h2>
+                <div className={css.association}>
+                    <h2>Is invited by me.</h2>
                     <AsyncButton
+                        className={css["assoc-button"]}
                         text="Cancel invite"
                         loadingText="Canceling invite..."
                         mainAction={handleCancelInvite}
                     />
                 </div>
             ) : user.friendship_id ? (
-                <div>
-                    <h2>I am friends with him</h2>
-                    <AsyncButton text="Unfriend" loadingText="Unfriending..." mainAction={handleUnfriend} />
-                </div>
-            ) : user.chat_id ? (
-                <div>
-                    <h2>I can chat with him</h2>
-                    <Link to={`/chats/${user.chat_id}`}>Chat</Link>
+                <div className={css.association}>
+                    <h2>I am friends with him.</h2>
+                    <AsyncButton
+                        className={css["assoc-button"]}
+                        text="Unfriend"
+                        loadingText="Unfriending..."
+                        mainAction={handleUnfriend}
+                    />
+                    <div>
+                        <Link className={css.chat} to={`/chats/${user.chat_id}`}>
+                            Chat
+                        </Link>
+                    </div>
                 </div>
             ) : (
-                <div>
-                    <h2>Not friends</h2>
-                    <AsyncButton text="Invite" loadingText="Inviting..." mainAction={handleInvite} />
+                <div className={css.association}>
+                    <h2>Not friends.</h2>
+                    <AsyncButton
+                        className={css["assoc-button"]}
+                        text="Invite"
+                        loadingText="Inviting..."
+                        mainAction={handleInvite}
+                    />
                 </div>
             )}
-            <h2>Friends</h2>
-            <ul>
-                {user.friends.map((friend) => (
-                    <li key={friend._id}>
-                        <UserBox user={friend} />
-                    </li>
-                ))}
-            </ul>
-            <h2>Posts</h2>
+            {user.friends.length > 0 && <h2>Friends</h2>}
+            {user.friends.map((friend) => (
+                <div key={friend._id}>
+                    <UserBox user={friend} />
+                </div>
+            ))}
             {user._id === currentUser._id && <AddPostModal addPost={addPost} />}
             {user.posts.map((post) => (
                 <Post deletePost={deletePost} key={post._id} initialPost={post} />

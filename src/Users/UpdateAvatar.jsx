@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { apiUpdateAvatar } from "../../helpers/API";
 import ImagePicker from "../shared/ImagePicker";
+import css from "./styles/UpdateAvatar.module.css";
 
 function UpdateAvatar({ onSuccess }) {
     const [avatar, setAvatar] = useState(null);
@@ -24,11 +25,10 @@ function UpdateAvatar({ onSuccess }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="avatar">Update Avatar</label>
-            <ImagePicker id="avatar" setImage={setAvatar} />
-            {error && <div className="error">{error}</div>}
-            <button type="submit" disabled={loading}>
-                {loading ? "Updating..." : "Update"}
+            <ImagePicker setImage={setAvatar} />
+            {error && <div className={css.error}>{error}</div>}
+            <button className={css.submit} type="submit" disabled={loading}>
+                {loading ? "Updating..." : "Update Avatar"}
             </button>
         </form>
     );

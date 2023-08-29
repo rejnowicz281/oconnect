@@ -1,0 +1,19 @@
+.label {
+    display: block;
+    margin: 10px 0;
+}
+.error {
+    margin-top: 10px;
+    color: red;
+}
+
+.submit {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    transition: 0.1s;
+}
