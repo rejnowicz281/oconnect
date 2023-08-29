@@ -3,6 +3,7 @@ import { apiCreateInvite, apiDeleteInvite, apiFetchUsers } from "../../helpers/A
 import AsyncButton from "../shared/AsyncButton";
 import PageLoading from "../shared/PageLoading";
 import UserBox from "./UserBox";
+import css from "./styles/Users.module.css";
 
 function Users() {
     const [users, setUsers] = useState(null);
@@ -50,26 +51,24 @@ function Users() {
     return (
         <div>
             <h1>Users</h1>
-            <ul>
-                {users.map((user) => (
-                    <li key={user._id}>
-                        <UserBox user={user} />
-                        {user.invite_id ? (
-                            <AsyncButton
-                                text="Cancel Invite"
-                                loadingText="Cancelling Invite..."
-                                mainAction={() => handleCancelInvite(user._id, user.invite_id)}
-                            />
-                        ) : (
-                            <AsyncButton
-                                text="Send Invite"
-                                loadingText="Sending Invite..."
-                                mainAction={() => handleSendInvite(user._id)}
-                            />
-                        )}
-                    </li>
-                ))}
-            </ul>
+            {users.map((user) => (
+                <div className={css["user-box"]} key={user._id}>
+                    <UserBox user={user} />
+                    {user.invite_id ? (
+                        <AsyncButton
+                            text="Cancel Invite"
+                            loadingText="Cancelling Invite..."
+                            mainAction={() => handleCancelInvite(user._id, user.invite_id)}
+                        />
+                    ) : (
+                        <AsyncButton
+                            text="Send Invite"
+                            loadingText="Sending Invite..."
+                            mainAction={() => handleSendInvite(user._id)}
+                        />
+                    )}
+                </div>
+            ))}
         </div>
     );
 }
