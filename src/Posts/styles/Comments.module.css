@@ -1,0 +1,45 @@
+.container {
+    margin: 10px 0;
+}
+
+.loading {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.comment {
+    margin: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete {
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    background-color: inherit;
+    font-weight: 500;
+    font-size: 17px;
+    transition: 0.1s;
+    border-radius: 15px;
+}
+
+.delete:hover {
+    background-color: #ccc;
+}
+
+.date {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.no-comments {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 500;
+}

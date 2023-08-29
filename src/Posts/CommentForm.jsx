@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { AiOutlineLoading, AiOutlineSend } from "react-icons/ai";
 import { apiCreatePostComment } from "../../helpers/API";
+import css from "./styles/CommentForm.module.css";
 
 function CommentForm({ postId, addComment }) {
     const [text, setText] = useState("");
@@ -23,16 +25,24 @@ function CommentForm({ postId, addComment }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="text">Comment</label>
-                <input type="text" name="text" value={text} onChange={(e) => setText(e.target.value)} />
-            </div>
             {errors.map((error) => (
-                <div key={error.msg}>{error.msg}</div>
+                <div className={css.error} key={error.msg}>
+                    {error.msg}
+                </div>
             ))}
-            <button disabled={loading} type="submit">
-                {loading ? "Submitting..." : "Submit"}
-            </button>
+            <div className={css["input-box"]}>
+                <input
+                    placeholder="Comment about stuff!"
+                    className={css.input}
+                    type="text"
+                    name="text"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
+                <button className={css.submit} disabled={loading} type="submit">
+                    {loading ? <AiOutlineLoading className="spin" /> : <AiOutlineSend />}
+                </button>
+            </div>
         </form>
     );
 }

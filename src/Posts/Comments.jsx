@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { apiDeletePostComment, apiFetchPostComments } from "../../helpers/API";
+import formatDate from "../../helpers/formatDate";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 import CommentForm from "./CommentForm";
+import css from "./styles/Comments.module.css";
 
 function Comments({ postId, isPostOwner }) {
     const currentUser = useAuthStore((state) => state.currentUser);
@@ -37,28 +39,31 @@ function Comments({ postId, isPostOwner }) {
         setComments((comments) => comments.filter((comment) => comment._id !== commentId));
     }
 
-    if (!comments) return <div>Loading...</div>;
+    if (!comments) return <div className={css.loading}>Loading...</div>;
 
     return (
-        <div>
+        <div className={css.container}>
             <CommentForm postId={postId} addComment={addComment} />
             {comments.length > 0 ? (
                 comments.map((comment) => (
-                    <div key={comment._id}>
-                        <UserBox user={comment.user} />
-                        <div>{comment.text}</div>
-                        <div>{comment.createdAt}</div>
-                        {(comment.user._id === currentUser._id || isPostOwner) && (
-                            <AsyncButton
-                                mainAction={() => handleDelete(comment._id)}
-                                text="Delete"
-                                loadingText="Deleting..."
-                            />
-                        )}
+                    <div className={css.comment} key={comment._id}>
+                        <div className={css.top}>
+                            <UserBox user={comment.user} />
+                            {(comment.user._id === currentUser._id || isPostOwner) && (
+                                <AsyncButton
+                                    className={css.delete}
+                                    mainAction={() => handleDelete(comment._id)}
+                                    text="Delete"
+                                    loadingText="Deleting..."
+                                />
+                            )}
+                        </div>
+                        <div className={css.date}>{formatDate(comment.createdAt)}</div>
+                        <p>{comment.text}</p>
                     </div>
                 ))
             ) : (
-                <div>No comments</div>
+                <div className={css["no-comments"]}>No comments</div>
             )}
         </div>
     );

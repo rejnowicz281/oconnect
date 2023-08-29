@@ -1,0 +1,35 @@
+.input-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.error {
+    color: red;
+    margin: 10px 0;
+}
+
+.input {
+    flex: 1;
+    border: none;
+    padding: 7px;
+    background-color: inherit;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.submit {
+    font-size: 20px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.submit:hover {
+    color: grey;
+}

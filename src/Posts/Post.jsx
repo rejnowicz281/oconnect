@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
+import { BsFillHeartFill, BsHeartbreakFill } from "react-icons/bs";
 import { apiDeletePost, apiLikePost } from "../../helpers/API";
+import formatDate from "../../helpers/formatDate";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 import Comments from "./Comments";
 import EditPostModal from "./EditPostModal";
+import css from "./styles/Post.module.css";
 
 function Post({ initialPost, deletePost }) {
     const currentUser = useAuthStore((state) => state.currentUser);
@@ -67,21 +71,46 @@ function Post({ initialPost, deletePost }) {
     }
 
     return (
-        <div>
-            <UserBox user={post.user} />
-            <h3>{post.text}</h3>
-            {isPostOwner && <AsyncButton mainAction={handleDelete} text="Delete" loadingText="Deleting..." />}
-            {isPostOwner && <EditPostModal post={post} setPost={setPost} />}
-            {post.photo && <img height="300" width="300" src={post.photo.url} />}
-            <div>{post.likes.length} Likes</div>
-            <div>{post.createdAt}</div>
-
-            <AsyncButton
-                mainAction={handleLike}
-                text={liked ? "Unlike" : "Like"}
-                loadingText={liked ? "Unliking..." : "Liking..."}
-            />
-            <button onClick={toggleComments} type="button">
+        <div className={css.container}>
+            <div className={css.top}>
+                <div className={css["top-left"]}>
+                    <UserBox user={post.user} />
+                </div>
+                {isPostOwner && (
+                    <div className={css["top-right"]}>
+                        <AsyncButton
+                            className={css.delete}
+                            mainAction={handleDelete}
+                            text="Delete"
+                            loadingText="Deleting..."
+                        />
+                        <EditPostModal buttonClassName={css.edit} post={post} setPost={setPost} />
+                    </div>
+                )}
+            </div>
+            <div className={css.date}>{formatDate(post.createdAt)}</div>
+            <div className={css.content}>
+                <p className={css.text}>{post.text}</p>
+                {post.photo && <img height="300" width="300" src={post.photo.url} />}
+            </div>
+            <div className={css["like-container"]}>
+                <AsyncButton
+                    className={css.like}
+                    mainAction={handleLike}
+                    text={liked ? <BsHeartbreakFill /> : <BsFillHeartFill />}
+                    loadingText={<AiOutlineLoading className="spin" />}
+                />
+                {post.likes.length == 0
+                    ? "This post has no likes."
+                    : post.likes.length == 1 && liked
+                    ? "1 person likes this post. (You)"
+                    : post.likes.length == 1
+                    ? "1 person likes this post"
+                    : liked
+                    ? `${post.likes.length} people like this post, you included.`
+                    : `${post.likes.length} people like this post.`}
+            </div>
+            <button className={css["comments-button"]} onClick={toggleComments} type="button">
                 Comments
             </button>
             {showComments && <Comments isPostOwner={isPostOwner} postId={post._id} />}

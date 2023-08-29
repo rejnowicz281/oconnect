@@ -1,0 +1,68 @@
+.container {
+    margin: 50px 0;
+    background-color: whitesmoke;
+    padding: 15px;
+}
+
+.content {
+    border-bottom: 1px solid #ccc;
+}
+
+.text {
+    font-weight: 500;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.delete,
+.edit {
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    background-color: inherit;
+    font-weight: 500;
+    font-size: 17px;
+    transition: 0.1s;
+    border-radius: 15px;
+}
+
+.delete:hover,
+.edit:hover {
+    background-color: #ccc;
+}
+
+.like-container {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.like {
+    font-size: 30px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    transition: 0.2s;
+    color: red;
+}
+
+.like:hover {
+    color: rgb(255, 123, 123);
+}
+
+.comments-button {
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    padding: 15px;
+    transition: 0.1s;
+}

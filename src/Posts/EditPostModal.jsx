@@ -5,7 +5,7 @@ import { postType } from "../propTypes";
 import Modal from "../shared/Modal";
 import PostForm from "./PostForm";
 
-function EditPostModal({ post, setPost }) {
+function EditPostModal({ buttonClassName, post, setPost }) {
     const [text, setText] = useState(post.text);
     const [photo, setPhoto] = useState(null);
     const [errors, setErrors] = useState([]);
@@ -28,7 +28,7 @@ function EditPostModal({ post, setPost }) {
 
     return (
         <>
-            <button type="button" onClick={() => setShowModal(true)}>
+            <button className={buttonClassName} type="button" onClick={() => setShowModal(true)}>
                 Edit
             </button>
             {showModal && (
@@ -57,6 +57,7 @@ function EditPostModal({ post, setPost }) {
 }
 
 EditPostModal.propTypes = {
+    buttonClassName: PropTypes.string.isRequired,
     post: postType.isRequired,
     setPost: PropTypes.func.isRequired,
 };
