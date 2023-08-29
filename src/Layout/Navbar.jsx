@@ -28,10 +28,28 @@ function Navbar() {
                         <NavLink
                             className={({ isActive }) => (isActive ? css.active : "")}
                             onClick={toggleNavbar}
+                            to="/home"
+                        >
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={({ isActive }) => (isActive ? css.active : "")}
+                            onClick={toggleNavbar}
                             to={"/users/" + currentUser._id}
                             end
                         >
                             Profile
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={({ isActive }) => (isActive ? css.active : "")}
+                            onClick={toggleNavbar}
+                            to="/invites/received"
+                        >
+                            Received Invites
                         </NavLink>
                     </li>
                     <li>
@@ -51,24 +69,6 @@ function Navbar() {
                             end
                         >
                             Users
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            className={({ isActive }) => (isActive ? css.active : "")}
-                            onClick={toggleNavbar}
-                            to="/invites/received"
-                        >
-                            Received Invites
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            className={({ isActive }) => (isActive ? css.active : "")}
-                            onClick={toggleNavbar}
-                            to="/posts"
-                        >
-                            Posts
                         </NavLink>
                     </li>
                 </ul>

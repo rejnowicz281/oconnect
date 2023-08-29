@@ -6,9 +6,9 @@ import PersistLogin from "./Auth/PersistLogin";
 import Register from "./Auth/Register";
 import Chat from "./Chat/Chat";
 import Friends from "./Friends/Friends";
+import Home from "./Home/Home";
 import Received from "./Invites/Received";
 import MainLayout from "./Layout/MainLayout";
-import Posts from "./Posts/Posts";
 import User from "./Users/User";
 import Users from "./Users/Users";
 import { useAuthStore } from "./store";
@@ -68,7 +68,7 @@ function App() {
                         <Route path="/friends" element={<Friends />} />
                         <Route path="/invites/received" element={<Received />} />
                         <Route path="/chats/:id" element={<Chat />} />
-                        <Route path="/posts" element={<Posts />} />
+                        <Route path="/home" element={<Home />} />
                         <Route path="/users" element={<Users />} />
                         <Route path="/users/:id" element={<User />} />
                     </Route>

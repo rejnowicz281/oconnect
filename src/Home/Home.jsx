@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { apiFetchPosts } from "../../helpers/API";
-import AddPostForm from "./AddPostForm";
-import Post from "./Post";
+import AddPostForm from "../Posts/AddPostForm";
+import Post from "../Posts/Post";
 
-function Posts() {
+function Home() {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
@@ -31,10 +31,9 @@ function Posts() {
     return (
         <div>
             <AddPostForm addPost={addPost} />
-            {console.log(posts)}
             {posts && posts.map((post) => <Post deletePost={deletePost} key={post._id} initialPost={post} />)}
         </div>
     );
 }
 
-export default Posts;
+export default Home;
