@@ -185,10 +185,12 @@ function User() {
                     <UserBox user={friend} />
                 </div>
             ))}
-            {user._id === currentUser._id && <AddPostModal addPost={addPost} />}
-            {user.posts.map((post) => (
-                <Post deletePost={deletePost} key={post._id} initialPost={post} />
-            ))}
+            <div className={css.feed}>
+                {user._id === currentUser._id && <AddPostModal addPost={addPost} />}
+                {user.posts.map((post) => (
+                    <Post deletePost={deletePost} key={post._id} initialPost={post} />
+                ))}
+            </div>
         </div>
     );
 }

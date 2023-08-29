@@ -24,3 +24,7 @@
 .chat:hover {
     color: blueviolet;
 }
+
+.feed {
+    margin-top: 50px;
+}
