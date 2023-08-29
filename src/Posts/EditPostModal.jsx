@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { apiUpdatePost } from "../../helpers/API";
-import ImagePicker from "../shared/ImagePicker";
+import { postType } from "../propTypes";
 import Modal from "../shared/Modal";
-import cssForm from "./styles/PostForm.module.css";
+import PostForm from "./PostForm";
 
-function EditPostModal({ editButtonClassName, post, setPost }) {
+function EditPostModal({ post, setPost }) {
     const [text, setText] = useState(post.text);
     const [photo, setPhoto] = useState(null);
     const [errors, setErrors] = useState([]);
@@ -19,8 +19,6 @@ function EditPostModal({ editButtonClassName, post, setPost }) {
         setLoading(false);
 
         if (res.status === 200) {
-            setText("");
-            setPhoto(null);
             setShowModal(false);
             setPost(res.data.post);
         } else {
@@ -30,7 +28,7 @@ function EditPostModal({ editButtonClassName, post, setPost }) {
 
     return (
         <>
-            <button className={editButtonClassName} type="button" onClick={() => setShowModal(true)}>
+            <button type="button" onClick={() => setShowModal(true)}>
                 Edit
             </button>
             {showModal && (
@@ -42,33 +40,16 @@ function EditPostModal({ editButtonClassName, post, setPost }) {
                         setShowModal(false);
                     }}
                 >
-                    <form onSubmit={handleSubmit}>
-                        {errors.map((error) => (
-                            <div key={error.msg}>{error.msg}</div>
-                        ))}
-                        <textarea
-                            type="text"
-                            className={cssForm.textarea}
-                            placeholder="What's on your mind?"
-                            onChange={(e) => setText(e.target.value)}
-                        >
-                            {text}
-                        </textarea>
-
-                        <label className={cssForm["photo-label"]} htmlFor="photo">
-                            Attach a photo
-                        </label>
-                        <ImagePicker id="photo" setImage={setPhoto} />
-
-                        {errors.map((error) => (
-                            <div className={cssForm.error} key={error.msg}>
-                                {error.msg}
-                            </div>
-                        ))}
-                        <button className={cssForm.submit} disabled={loading} type="submit">
-                            {loading ? "Updating..." : "Update"}
-                        </button>
-                    </form>
+                    <PostForm
+                        handleSubmit={handleSubmit}
+                        text={text}
+                        setText={setText}
+                        setPhoto={setPhoto}
+                        errors={errors}
+                        loading={loading}
+                        submitText="Update"
+                        submittingText="Updating..."
+                    />
                 </Modal>
             )}
         </>
@@ -76,24 +57,7 @@ function EditPostModal({ editButtonClassName, post, setPost }) {
 }
 
 EditPostModal.propTypes = {
-    editButtonClassName: PropTypes.string.isRequired,
-    post: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        photo: PropTypes.shape({
-            url: PropTypes.string.isRequired,
-        }),
-        likes: PropTypes.arrayOf(PropTypes.string).isRequired,
-        createdAt: PropTypes.string.isRequired,
-        user: PropTypes.shape({
-            _id: PropTypes.string.isRequired,
-            first_name: PropTypes.string.isRequired,
-            last_name: PropTypes.string.isRequired,
-            avatar: PropTypes.shape({
-                url: PropTypes.string.isRequired,
-            }),
-        }).isRequired,
-    }).isRequired,
+    post: postType.isRequired,
     setPost: PropTypes.func.isRequired,
 };
 

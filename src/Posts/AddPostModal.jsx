@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { apiCreatePost } from "../../helpers/API";
-import ImagePicker from "../shared/ImagePicker";
 import Modal from "../shared/Modal";
+import PostForm from "./PostForm";
 import cssModal from "./styles/AddPostModal.module.css";
-import cssForm from "./styles/PostForm.module.css";
 
 function AddPostModal({ addPost }) {
     const [text, setText] = useState("");
@@ -43,30 +42,16 @@ function AddPostModal({ addPost }) {
                         setShowModal(false);
                     }}
                 >
-                    <form onSubmit={handleSubmit}>
-                        <textarea
-                            type="text"
-                            className={cssForm.textarea}
-                            placeholder="What's on your mind?"
-                            onChange={(e) => setText(e.target.value)}
-                        >
-                            {text}
-                        </textarea>
-
-                        <label className={cssForm["photo-label"]} htmlFor="photo">
-                            Attach a photo
-                        </label>
-                        <ImagePicker id="photo" setImage={setPhoto} />
-
-                        {errors.map((error) => (
-                            <div className={cssForm.error} key={error.msg}>
-                                {error.msg}
-                            </div>
-                        ))}
-                        <button className={cssForm.submit} disabled={loading} type="submit">
-                            {loading ? "Posting..." : "Post"}
-                        </button>
-                    </form>
+                    <PostForm
+                        handleSubmit={handleSubmit}
+                        text={text}
+                        setText={setText}
+                        setPhoto={setPhoto}
+                        errors={errors}
+                        loading={loading}
+                        submitText="Post"
+                        submittingText="Posting..."
+                    />
                 </Modal>
             )}
         </>
