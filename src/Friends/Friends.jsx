@@ -4,6 +4,7 @@ import { apiDeleteFriendship, apiFetchFriends } from "../../helpers/API";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
 import PageLoading from "../shared/PageLoading";
+import css from "./Friends.module.css";
 
 function Friends() {
     const [friends, setFriends] = useState(null);
@@ -40,19 +41,21 @@ function Friends() {
     return (
         <div>
             <h1>Friends</h1>
-            <ul>
-                {friends.map((friend) => (
-                    <li key={friend.info._id}>
-                        <UserBox user={friend.info} />
-                        <Link to={"/chats/" + friend.chat_id}>Chat</Link>
-                        <AsyncButton
-                            mainAction={() => handleUnfriend(friend)}
-                            text="Unfriend"
-                            loadingText="Unfriending..."
-                        />
-                    </li>
-                ))}
-            </ul>
+            {friends.map((friend) => (
+                <div className={css["user-box"]} key={friend.info._id}>
+                    <UserBox user={friend.info} />
+                    <div>
+                        <Link className={css.chat} to={"/chats/" + friend.chat_id}>
+                            Chat
+                        </Link>
+                    </div>
+                    <AsyncButton
+                        mainAction={() => handleUnfriend(friend)}
+                        text="Unfriend"
+                        loadingText="Unfriending..."
+                    />
+                </div>
+            ))}
         </div>
     );
 }

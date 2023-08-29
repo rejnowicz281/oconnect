@@ -1,0 +1,19 @@
+.user-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 80px;
+}
+
+.user-box > button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.chat:hover {
+    color: blueviolet;
+}
