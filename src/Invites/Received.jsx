@@ -48,6 +48,8 @@ function Received() {
 
     if (!invites) return <PageLoading />;
 
+    if (invites.length === 0) return <div className={css["no-invites"]}>No one has invited you.</div>;
+
     return (
         <div>
             {invites.map((invite) => (

@@ -13,3 +13,7 @@
     cursor: pointer;
     transition: 0.1s;
 }
+
+.no-users {
+    text-align: center;
+}

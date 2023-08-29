@@ -38,22 +38,23 @@ function Friends() {
 
     if (!friends) return <PageLoading />;
 
+    if (friends.length === 0) return <div className={css["no-friends"]}>No friends.</div>;
+
     return (
         <div>
-            <h1>Friends</h1>
             {friends.map((friend) => (
                 <div className={css["user-box"]} key={friend.info._id}>
                     <UserBox user={friend.info} />
-                    <div>
-                        <Link className={css.chat} to={"/chats/" + friend.chat_id}>
-                            Chat
-                        </Link>
-                    </div>
                     <AsyncButton
                         mainAction={() => handleUnfriend(friend)}
                         text="Unfriend"
                         loadingText="Unfriending..."
                     />
+                    <div>
+                        <Link className={css.chat} to={"/chats/" + friend.chat_id}>
+                            Chat
+                        </Link>
+                    </div>
                 </div>
             ))}
         </div>
