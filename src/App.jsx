@@ -64,7 +64,7 @@ function App() {
             <Routes>
                 {currentUser && token ? (
                     <Route element={<MainLayout />}>
-                        <Route path="/*" element={<Navigate to="/friends" />} />
+                        <Route path="/*" element={<Navigate to="/home" />} />
                         <Route path="/friends" element={<Friends />} />
                         <Route path="/invites/received" element={<Received />} />
                         <Route path="/chats/:id" element={<Chat />} />
