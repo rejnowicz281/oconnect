@@ -51,7 +51,7 @@ function Received() {
     if (invites.length === 0) return <div className={css["no-invites"]}>No one has invited you.</div>;
 
     return (
-        <div>
+        <div className={css.container}>
             {invites.map((invite) => (
                 <div className={css["user-box"]} key={invite._id}>
                     <UserBox user={invite.inviter} />

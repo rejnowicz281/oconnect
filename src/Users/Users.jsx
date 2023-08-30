@@ -51,7 +51,7 @@ function Users() {
     if (users.length === 0) return <div className={css["no-users"]}>There are no users you can invite.</div>;
 
     return (
-        <div>
+        <div className={css.container}>
             {users.map((user) => (
                 <div className={css["user-box"]} key={user._id}>
                     <UserBox user={user} />

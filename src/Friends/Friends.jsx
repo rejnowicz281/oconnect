@@ -41,7 +41,7 @@ function Friends() {
     if (friends.length === 0) return <div className={css["no-friends"]}>No friends.</div>;
 
     return (
-        <div>
+        <div className={css.container}>
             {friends.map((friend) => (
                 <div className={css["user-box"]} key={friend.info._id}>
                     <UserBox user={friend.info} />

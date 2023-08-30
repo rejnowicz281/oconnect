@@ -118,7 +118,7 @@ function User() {
     if (!user) return <PageLoading />;
 
     return (
-        <div>
+        <div className={css.container}>
             <div className={css.header}>
                 <h1>
                     {user.first_name} {user.last_name}
