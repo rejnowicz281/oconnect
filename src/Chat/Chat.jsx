@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { apiDeleteMessage, apiFetchChat } from "../../helpers/API";
 import { useAuthStore } from "../store";
 import MessageForm from "./MessageForm";
@@ -12,7 +12,6 @@ import socket from "../socket";
 function Chat() {
     const currentUser = useAuthStore((state) => state.currentUser);
 
-    const navigate = useNavigate();
     const { id } = useParams();
     const [chat, setChat] = useState(null);
 
@@ -37,8 +36,9 @@ function Chat() {
     useEffect(() => {
         async function fetchChat() {
             const res = await apiFetchChat(id);
-            if (res.status === 200) setChat(res.data.chat);
-            else navigate("/friends");
+            if (res.status === 200) {
+                setChat(res.data.chat);
+            }
         }
         fetchChat();
     }, [id]);
