@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const URL = "http://localhost:3000";
+const URL = "https://oconnect.fly.dev";
 
 const socket = io(URL);
 
