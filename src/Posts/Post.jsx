@@ -105,7 +105,7 @@ function Post({ initialPost, deletePost }) {
                     : post.likes.length == 1 && liked
                     ? "1 person likes this post. (You)"
                     : post.likes.length == 1
-                    ? "1 person likes this post"
+                    ? "1 person likes this post."
                     : liked
                     ? `${post.likes.length} people like this post, you included.`
                     : `${post.likes.length} people like this post.`}
