@@ -1,0 +1,60 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+}
+
+.heading {
+    padding: 25px;
+    text-align: center;
+}
+
+.heading > a {
+    text-decoration: none;
+    color: black;
+}
+
+.heading > a:hover {
+    text-decoration: underline;
+}
+
+.messages {
+    border-top: 1px solid #ccc;
+    flex: 1;
+    padding: 25px 0;
+    overflow-y: scroll;
+    margin-bottom: 40px;
+}
+
+.message {
+    margin: 40px 0;
+}
+
+.message:first-child {
+    margin-top: 0;
+}
+
+.message:last-child {
+    margin-bottom: 0;
+}
+
+.delete {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    padding: 0;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.delete:hover {
+    color: rgb(124, 69, 69);
+}
+
+.text {
+    padding-left: 30px;
+}

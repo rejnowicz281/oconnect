@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { apiDeleteMessage, apiFetchChat } from "../../helpers/API";
 import { useAuthStore } from "../store";
 import MessageForm from "./MessageForm";
+import css from "./styles/Chat.module.css";
 
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
@@ -11,6 +12,7 @@ import socket from "../socket";
 
 function Chat() {
     const currentUser = useAuthStore((state) => state.currentUser);
+    const messagesRef = useRef(null);
 
     const { id } = useParams();
     const [chat, setChat] = useState(null);
@@ -43,6 +45,13 @@ function Chat() {
         fetchChat();
     }, [id]);
 
+    useEffect(() => {
+        if (chat) {
+            const messages = messagesRef.current;
+            messages.scrollTop = messages.scrollHeight;
+        }
+    }, [chat]);
+
     function addMessage(message) {
         setChat((prevChat) => ({
             ...prevChat,
@@ -60,26 +69,28 @@ function Chat() {
     if (!chat) return <PageLoading />;
 
     return (
-        <div>
-            <h1>
+        <div className={css.container}>
+            <h1 className={css.heading}>
                 <Link to={`/users/${chat.other_user._id}`}>
                     {chat.other_user.first_name} {chat.other_user.last_name}
                 </Link>
             </h1>
-            <ul>
+            <div className={css.messages} ref={messagesRef}>
                 {chat.messages.map((message) => (
-                    <li key={message._id}>
-                        <UserBox user={message.user} /> {message.text}
+                    <div className={css.message} key={message._id}>
+                        <UserBox user={message.user} />
                         {message.user._id == currentUser._id && (
                             <AsyncButton
+                                className={css.delete}
                                 mainAction={() => apiDeleteMessage(chat._id, message._id)}
                                 content="Delete"
                                 loadingContent="Deleting..."
                             />
                         )}
-                    </li>
+                        <div className={css.text}>{message.text}</div>
+                    </div>
                 ))}
-            </ul>
+            </div>
             <MessageForm />
         </div>
     );
