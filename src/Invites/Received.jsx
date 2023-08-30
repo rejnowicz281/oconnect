@@ -57,14 +57,14 @@ function Received() {
                     <UserBox user={invite.inviter} />
                     <AsyncButton
                         mainAction={() => handleDeclineInvite(invite._id)}
-                        text="Decline Invite"
-                        loadingText="Declining Invite..."
+                        content="Decline Invite"
+                        loadingContent="Declining Invite..."
                     />
 
                     <AsyncButton
                         mainAction={() => handleAcceptInvite(invite._id)}
-                        text="Accept Invite"
-                        loadingText="Accepting Invite..."
+                        content="Accept Invite"
+                        loadingContent="Accepting Invite..."
                     />
                 </div>
             ))}

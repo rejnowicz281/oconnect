@@ -88,8 +88,8 @@ function Login() {
                 <FacebookLoginButton onSuccess={handleFacebookResponse} />
                 <AsyncButton
                     className={cssLogin["demo-login"]}
-                    text="Demo Login"
-                    loadingText="Logging in..."
+                    content="Demo Login"
+                    loadingContent="Logging in..."
                     mainAction={handleDemoLogin}
                 />
                 <div className={cssAuth["auth-link-container"]}>

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
-function AsyncButton({ className, mainAction, text, loadingText, type = "button" }) {
+function AsyncButton({ className, mainAction, content, loadingContent, type = "button" }) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function AsyncButton({ className, mainAction, text, loadingText, type = "button"
 
     return (
         <button className={className} type={type} onClick={handleMainAction} disabled={loading}>
-            {loading ? loadingText : text}
+            {loading ? loadingContent : content}
         </button>
     );
 }
@@ -26,9 +26,9 @@ function AsyncButton({ className, mainAction, text, loadingText, type = "button"
 AsyncButton.propTypes = {
     className: PropTypes.string,
     mainAction: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired,
-    loadingText: PropTypes.string.isRequired,
     type: PropTypes.string,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    loadingContent: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 export default AsyncButton;

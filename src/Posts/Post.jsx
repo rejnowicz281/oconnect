@@ -81,8 +81,8 @@ function Post({ initialPost, deletePost }) {
                         <AsyncButton
                             className={css.delete}
                             mainAction={handleDelete}
-                            text="Delete"
-                            loadingText="Deleting..."
+                            content="Delete"
+                            loadingContent="Deleting..."
                         />
                         <EditPostModal buttonClassName={css.edit} post={post} setPost={setPost} />
                     </div>
@@ -97,8 +97,8 @@ function Post({ initialPost, deletePost }) {
                 <AsyncButton
                     className={css.like}
                     mainAction={handleLike}
-                    text={liked ? <BsHeartbreakFill /> : <BsFillHeartFill />}
-                    loadingText={<AiOutlineLoading className="spin" />}
+                    content={liked ? <BsHeartbreakFill /> : <BsFillHeartFill />}
+                    loadingContent={<AiOutlineLoading className="spin" />}
                 />
                 {post.likes.length == 0
                     ? "This post has no likes."

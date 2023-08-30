@@ -135,8 +135,8 @@ function User() {
                     <h2>Invited me.</h2>
                     <AsyncButton
                         className={css["assoc-button"]}
-                        text="Accept invite"
-                        loadingText="Accepting invite..."
+                        content="Accept invite"
+                        loadingContent="Accepting invite..."
                         mainAction={handleAcceptInvite}
                     />
                 </div>
@@ -145,8 +145,8 @@ function User() {
                     <h2>Is invited by me.</h2>
                     <AsyncButton
                         className={css["assoc-button"]}
-                        text="Cancel invite"
-                        loadingText="Canceling invite..."
+                        content="Cancel invite"
+                        loadingContent="Canceling invite..."
                         mainAction={handleCancelInvite}
                     />
                 </div>
@@ -155,8 +155,8 @@ function User() {
                     <h2>I am friends with him.</h2>
                     <AsyncButton
                         className={css["assoc-button"]}
-                        text="Unfriend"
-                        loadingText="Unfriending..."
+                        content="Unfriend"
+                        loadingContent="Unfriending..."
                         mainAction={handleUnfriend}
                     />
                     <div>
@@ -170,8 +170,8 @@ function User() {
                     <h2>Not friends.</h2>
                     <AsyncButton
                         className={css["assoc-button"]}
-                        text="Invite"
-                        loadingText="Inviting..."
+                        content="Invite"
+                        loadingContent="Inviting..."
                         mainAction={handleInvite}
                     />
                 </div>

@@ -53,8 +53,8 @@ function Comments({ postId, isPostOwner }) {
                                 <AsyncButton
                                     className={css.delete}
                                     mainAction={() => handleDelete(comment._id)}
-                                    text="Delete"
-                                    loadingText="Deleting..."
+                                    content="Delete"
+                                    loadingContent="Deleting..."
                                 />
                             )}
                         </div>

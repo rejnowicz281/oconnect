@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { apiDeleteMessage, apiFetchChat } from "../../helpers/API";
 import { useAuthStore } from "../store";
 import MessageForm from "./MessageForm";
@@ -61,7 +61,11 @@ function Chat() {
 
     return (
         <div>
-            <h1>Chat</h1>
+            <h1>
+                <Link to={`/users/${chat.other_user._id}`}>
+                    {chat.other_user.first_name} {chat.other_user.last_name}
+                </Link>
+            </h1>
             <ul>
                 {chat.messages.map((message) => (
                     <li key={message._id}>
@@ -69,8 +73,8 @@ function Chat() {
                         {message.user._id == currentUser._id && (
                             <AsyncButton
                                 mainAction={() => apiDeleteMessage(chat._id, message._id)}
-                                text="Delete"
-                                loadingText="Deleting..."
+                                content="Delete"
+                                loadingContent="Deleting..."
                             />
                         )}
                     </li>

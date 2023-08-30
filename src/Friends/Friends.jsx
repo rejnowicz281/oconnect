@@ -47,8 +47,8 @@ function Friends() {
                     <UserBox user={friend.info} />
                     <AsyncButton
                         mainAction={() => handleUnfriend(friend)}
-                        text="Unfriend"
-                        loadingText="Unfriending..."
+                        content="Unfriend"
+                        loadingContent="Unfriending..."
                     />
                     <div>
                         <Link className={css.chat} to={"/chats/" + friend.chat_id}>

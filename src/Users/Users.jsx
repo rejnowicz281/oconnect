@@ -57,14 +57,14 @@ function Users() {
                     <UserBox user={user} />
                     {user.invite_id ? (
                         <AsyncButton
-                            text="Cancel Invite"
-                            loadingText="Cancelling Invite..."
+                            content="Cancel Invite"
+                            loadingContent="Cancelling Invite..."
                             mainAction={() => handleCancelInvite(user._id, user.invite_id)}
                         />
                     ) : (
                         <AsyncButton
-                            text="Send Invite"
-                            loadingText="Sending Invite..."
+                            content="Send Invite"
+                            loadingContent="Sending Invite..."
                             mainAction={() => handleSendInvite(user._id)}
                         />
                     )}
