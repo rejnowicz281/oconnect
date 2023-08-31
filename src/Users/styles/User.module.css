@@ -8,7 +8,16 @@
 }
 
 .header > img {
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
+    font-size: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(214, 133, 133);
+    color: white;
+    font-weight: bold;
 }
 
 .user-name {

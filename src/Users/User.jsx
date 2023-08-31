@@ -123,7 +123,7 @@ function User() {
                 <h1 className={css["user-name"]}>
                     {user.first_name} {user.last_name}
                 </h1>
-                <img src={user.avatar.url} alt="" />
+                <img height="200" width="200" src={user.avatar.url} alt="404" />
             </div>
             {user._id === currentUser._id ? (
                 <div className={css.association}>

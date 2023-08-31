@@ -8,6 +8,12 @@
     height: 50px;
     border-radius: 50%;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(214, 133, 133);
+    color: white;
+    font-weight: bold;
 }
 
 .link {

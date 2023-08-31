@@ -5,7 +5,7 @@ import css from "./styles/UserBox.module.css";
 function UserBox({ user }) {
     return (
         <div className={css.container}>
-            <img className={css.img} height={50} width={50} src={user.avatar.url} alt="?" />
+            <img className={css.img} height="50" width="50" src={user.avatar.url} alt="404" />
             <Link className={css.link} to={"/users/" + user._id}>
                 {user.first_name} {user.last_name}
             </Link>
