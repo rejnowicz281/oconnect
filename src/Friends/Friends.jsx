@@ -10,21 +10,21 @@ function Friends() {
     const [friends, setFriends] = useState(null);
 
     useEffect(() => {
-        const fetchFriends = async () => {
-            const res = await apiFetchFriends();
-
-            if (res.status === 200) {
-                console.log(res.data);
-                setFriends(res.data.friends);
-            }
-        };
-
         fetchFriends();
 
         return () => {
             setFriends(null);
         };
     }, []);
+
+    async function fetchFriends(retry = 0) {
+        if (retry > 10) return setFriends(null);
+
+        const res = await apiFetchFriends();
+
+        if (res.status === 200) setFriends(res.data.friends);
+        else fetchFriends(retry + 1);
+    }
 
     async function handleUnfriend(friend) {
         const res = await apiDeleteFriendship(friend.friendship_id);

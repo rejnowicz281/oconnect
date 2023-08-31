@@ -30,13 +30,13 @@ function User() {
         };
     }, [id]);
 
-    async function fetchUser() {
-        setUser(null);
-        const response = await apiFetchUser(id);
+    async function fetchUser(retry = 0) {
+        if (retry > 10) return setUser(null);
 
-        if (response.status === 200) {
-            setUser(response.data.user);
-        }
+        const res = await apiFetchUser(id);
+
+        if (res.status === 200) setUser(res.data.user);
+        else fetchUser(retry + 1);
     }
 
     async function handleAcceptInvite() {

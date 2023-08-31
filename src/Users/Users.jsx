@@ -9,21 +9,21 @@ function Users() {
     const [users, setUsers] = useState(null);
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            const res = await apiFetchUsers();
-
-            if (res.status === 200) {
-                console.log(res.data.users);
-                setUsers(res.data.users);
-            }
-        };
-
         fetchUsers();
 
         return () => {
             setUsers(null);
         };
     }, []);
+
+    async function fetchUsers(retry = 0) {
+        if (retry > 10) return setUsers(null);
+
+        const res = await apiFetchUsers();
+
+        if (res.status === 200) setUsers(res.data.users);
+        else fetchUsers(retry + 1);
+    }
 
     async function setInviteId(userId, inviteId) {
         setUsers((users) => {

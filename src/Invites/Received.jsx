@@ -9,21 +9,21 @@ function Received() {
     const [invites, setInvites] = useState(null);
 
     useEffect(() => {
-        const fetchInvites = async () => {
-            const res = await apiFetchInvitesReceived();
-
-            if (res.status === 200) {
-                console.log(res.data);
-                setInvites(res.data.invitesReceived);
-            }
-        };
-
         fetchInvites();
 
         return () => {
             setInvites(null);
         };
     }, []);
+
+    async function fetchInvites(retry = 0) {
+        if (retry > 10) return setInvites(null);
+
+        const res = await apiFetchInvitesReceived();
+
+        if (res.status === 200) setInvites(res.data.invitesReceived);
+        else fetchInvites(retry + 1);
+    }
 
     async function deleteInvite(inviteId) {
         setInvites((invites) => {

@@ -9,18 +9,21 @@ function Home() {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
-        async function fetchPosts() {
-            const res = await apiFetchPosts();
-
-            if (res.status === 200) setPosts(res.data.posts);
-            else setPosts(null);
-        }
         fetchPosts();
 
         return () => {
             setPosts(null);
         };
     }, []);
+
+    async function fetchPosts(retry = 0) {
+        if (retry > 10) return setPosts(null);
+
+        const res = await apiFetchPosts();
+
+        if (res.status === 200) setPosts(res.data.posts);
+        else fetchPosts(retry + 1);
+    }
 
     function addPost(post) {
         setPosts((posts) => [post, ...posts]);

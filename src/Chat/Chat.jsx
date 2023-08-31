@@ -36,13 +36,11 @@ function Chat() {
     }, [id]);
 
     useEffect(() => {
-        async function fetchChat() {
-            const res = await apiFetchChat(id);
-            if (res.status === 200) {
-                setChat(res.data.chat);
-            }
-        }
         fetchChat();
+
+        return () => {
+            setChat(null);
+        };
     }, [id]);
 
     useEffect(() => {
@@ -51,6 +49,15 @@ function Chat() {
             messages.scrollTop = messages.scrollHeight;
         }
     }, [chat]);
+
+    async function fetchChat(retry = 0) {
+        if (retry > 10) return setChat(null);
+
+        const res = await apiFetchChat(id);
+
+        if (res.status === 200) setChat(res.data.chat);
+        else fetchChat(retry + 1);
+    }
 
     function addMessage(message) {
         setChat((prevChat) => ({
