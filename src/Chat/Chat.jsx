@@ -44,7 +44,7 @@ function Chat() {
     }, [id]);
 
     useEffect(() => {
-        if (chat) {
+        if (chat && messagesRef?.current) {
             const messages = messagesRef.current;
             messages.scrollTop = messages.scrollHeight;
         }
