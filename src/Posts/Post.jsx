@@ -21,21 +21,11 @@ function Post({ initialPost, deletePost }) {
 
     useEffect(() => {
         if (post.user._id === currentUser._id) setIsPostOwner(true);
-
-        return () => {
-            setIsPostOwner(false);
-            setLiked(false);
-            setShowComments(false);
-        };
     }, []);
 
     useEffect(() => {
         if (post.likes.includes(currentUser._id)) setLiked(true);
         else setLiked(false);
-
-        return () => {
-            setLiked(false);
-        };
     }, [post.likes]);
 
     async function handleLike() {
