@@ -19,3 +19,4 @@ Assignment for The Odin Project - [Odin-Book](https://www.theodinproject.com/les
 ## Known Issues
 
 -   Chat sometimes doesn't work (Fly.io issue, probably related to the free tier limitations)
+-   Facebook Login returns an error, sometimes logs in successfully, sometimes not (Facebook issue?)
