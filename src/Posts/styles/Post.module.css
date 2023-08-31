@@ -6,10 +6,16 @@
 
 .content {
     border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }
 
 .text {
     font-weight: 500;
+}
+
+.photo {
+    max-height: 300px;
+    max-width: 100%;
 }
 
 .top {

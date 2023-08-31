@@ -81,7 +81,7 @@ function Post({ initialPost, deletePost }) {
             <div className={css.date}>{formatDate(post.createdAt)}</div>
             <div className={css.content}>
                 <p className={css.text}>{post.text}</p>
-                {post.photo && <img height="300" width="300" src={post.photo.url} />}
+                {post.photo && <img className={css.photo} src={post.photo.url} />}
             </div>
             <div className={css["like-container"]}>
                 <AsyncButton
