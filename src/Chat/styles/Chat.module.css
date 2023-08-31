@@ -27,7 +27,7 @@
     border-top: 1px solid #ccc;
     flex: 1;
     padding: 25px 0;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-bottom: 40px;
 }
 
@@ -44,12 +44,15 @@
 }
 
 .delete {
+    margin-left: 50px;
+    font-size: 12px;
     border: none;
     background-color: inherit;
     cursor: pointer;
     padding: 0;
     display: block;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .delete:hover {
@@ -57,5 +60,6 @@
 }
 
 .text {
-    padding-left: 30px;
+    margin-left: 50px;
+    font-size: 14px;
 }
