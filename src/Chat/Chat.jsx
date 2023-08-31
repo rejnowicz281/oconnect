@@ -19,16 +19,16 @@ function Chat() {
     const [socketLoaded, setSocketLoaded] = useState(false);
 
     useEffect(() => {
-        // Initially, the socket could be connected, but we need to make sure it actually is
-        setSocketLoaded(true);
+        // Set the initial socketLoaded state to the current socket connection status
+        setSocketLoaded(socket.connected);
 
-        // If the socket connects, we need to make sure the socketLoaded state is set to true
+        // If the socket connects, make sure the socketLoaded state is set to true
         socket.on("connect", () => {
             console.log("Connected to socket");
             setSocketLoaded(true);
         });
 
-        // If the socket fails to connect, we need to make sure the socketLoaded state is set to false
+        // If the socket fails to connect, make sure the socketLoaded state is set to false
         socket.on("connect_error", (err) => {
             console.log("Socket connection error", err);
             setSocketLoaded(false);
@@ -58,7 +58,7 @@ function Chat() {
             socket.off("addMessage");
             socket.off("removeMessage");
         };
-    }, [id]);
+    }, [id, socketLoaded]);
 
     useEffect(() => {
         if (socketLoaded) fetchChat();
@@ -98,9 +98,9 @@ function Chat() {
         }));
     }
 
-    if (!chat) return <PageLoading />;
-
     if (!socketLoaded) return <PageLoading text="Connecting to socket..." />;
+
+    if (!chat) return <PageLoading />;
 
     return (
         <div className={css.container}>
