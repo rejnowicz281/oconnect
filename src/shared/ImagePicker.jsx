@@ -29,7 +29,7 @@ function ImagePicker({ setImage, id }) {
 }
 
 ImagePicker.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     setImage: PropTypes.func.isRequired,
 };
 
