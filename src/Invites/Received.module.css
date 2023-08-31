@@ -8,7 +8,14 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 40px;
+}
+
+.user-box:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .user-box > button {

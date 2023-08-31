@@ -7,17 +7,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 80px;
+    gap: 10px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 40px;
+}
+
+.user-box:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .user-box > button {
+    margin: 10px 0;
     padding: 10px 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-weight: 500;
     cursor: pointer;
     transition: 0.1s;
+    max-width: 50%;
     width: 100%;
 }
 
