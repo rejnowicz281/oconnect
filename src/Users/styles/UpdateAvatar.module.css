@@ -8,10 +8,15 @@
 }
 
 .submit {
+    background-color: rgb(240, 240, 240);
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 8px;
     font-weight: 500;
     cursor: pointer;
     transition: 0.1s;
+}
+
+.submit:hover {
+    background-color: rgb(225, 225, 225);
 }

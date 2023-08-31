@@ -66,6 +66,7 @@
 }
 
 .comments-button {
+    background-color: rgb(240, 240, 240);
     width: 100%;
     font-weight: 500;
     font-size: 16px;
@@ -73,4 +74,8 @@
     padding: 15px;
     transition: 0.1s;
     border-radius: 5px;
+}
+
+.comments-button:hover {
+    background-color: rgb(225, 225, 225);
 }

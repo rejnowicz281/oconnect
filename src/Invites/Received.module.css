@@ -19,6 +19,7 @@
 }
 
 .user-box > button {
+    background-color: rgb(240, 240, 240);
     padding: 10px 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -26,6 +27,9 @@
     cursor: pointer;
     transition: 0.1s;
     width: 100%;
+}
+.user-box > button:hover {
+    background-color: rgb(225, 225, 225);
 }
 
 .no-invites {

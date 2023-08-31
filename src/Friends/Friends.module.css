@@ -19,6 +19,7 @@
 }
 
 .user-box > button {
+    background-color: rgb(240, 240, 240);
     margin: 10px 0;
     padding: 10px 20px;
     border: 1px solid #ccc;
@@ -28,6 +29,10 @@
     transition: 0.1s;
     max-width: 50%;
     width: 100%;
+}
+
+.user-box > button:hover {
+    background-color: rgb(225, 225, 225);
 }
 
 .chat {
