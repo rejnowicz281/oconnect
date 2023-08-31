@@ -1,6 +1,7 @@
 import FacebookLogin from "@greatsumini/react-facebook-login";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { BsFacebook } from "react-icons/bs";
 import css from "./styles/FacebookLoginButton.module.css";
 
 function FacebookLoginButton({ onSuccess }) {
@@ -28,6 +29,7 @@ function FacebookLoginButton({ onSuccess }) {
                     }}
                     className={css["button"]}
                 >
+                    <BsFacebook className={css.icon} />
                     {loading ? "Logging in..." : "Login with Facebook"}
                 </button>
             )}

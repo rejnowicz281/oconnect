@@ -11,6 +11,10 @@
     font-weight: 500;
     cursor: pointer;
     margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .button:hover {
@@ -21,4 +25,8 @@
     background-color: rgb(191, 191, 191);
     color: rgb(127, 127, 127);
     cursor: not-allowed;
+}
+
+.icon {
+    font-size: 20px;
 }
