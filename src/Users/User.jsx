@@ -6,6 +6,7 @@ import {
     apiDeleteFriendship,
     apiDeleteInvite,
     apiFetchUser,
+    apiResetAvatar,
 } from "../../helpers/API";
 import AddPostModal from "../Posts/AddPostModal";
 import Post from "../Posts/Post";
@@ -79,6 +80,15 @@ function User() {
         }
     }
 
+    async function handleResetAvatar() {
+        const res = await apiResetAvatar();
+
+        if (res.status === 200) {
+            setUser(null); // To force a re-render
+            await fetchUser();
+        }
+    }
+
     function addPost(post) {
         setUser((user) => ({ ...user, posts: [post, ...user.posts] }));
     }
@@ -128,6 +138,12 @@ function User() {
             {user._id === currentUser._id ? (
                 <div className={css.association}>
                     <h2 className={css["assoc-text"]}>This is me.</h2>
+                    <AsyncButton
+                        className={css["assoc-button"]}
+                        content="Reset Avatar"
+                        loadingContent="Resetting avatar..."
+                        mainAction={handleResetAvatar}
+                    />
                     <UpdateAvatar
                         onSuccess={async () => {
                             setUser(null); // To force a re-render

@@ -320,3 +320,13 @@ export async function apiUpdateAvatar(avatar) {
         return error.response;
     }
 }
+
+export async function apiResetAvatar() {
+    try {
+        const response = await apiAuth.patch("avatar/reset");
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
