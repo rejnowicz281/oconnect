@@ -131,7 +131,7 @@ function User() {
                     <UpdateAvatar
                         onSuccess={async () => {
                             setUser(null); // To force a re-render
-                            await fetchUser(id);
+                            await fetchUser();
                         }}
                     />
                 </div>
