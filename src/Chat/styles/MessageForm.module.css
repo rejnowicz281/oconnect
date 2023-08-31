@@ -3,7 +3,13 @@
     display: flex;
     align-items: center;
     background-color: whitesmoke;
-    border-radius: 5px;
+    border-radius: 25px;
+    transition: 0.1s;
+    padding: 5px;
+}
+
+.input-box:hover {
+    box-shadow: 0 0 3px grey;
 }
 
 .error {
@@ -16,6 +22,8 @@
     border: none;
     padding: 7px;
     background-color: inherit;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
 }
 
 .input:focus {
@@ -28,8 +36,11 @@
     background-color: inherit;
     cursor: pointer;
     transition: 0.1s;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .submit:hover {
     color: grey;
+    scale: 1.1;
 }

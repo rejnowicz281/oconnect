@@ -25,7 +25,9 @@ function UpdateAvatar({ onSuccess }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <ImagePicker setImage={setAvatar} />
+            <div className={css["image-picker-wrapper"]}>
+                <ImagePicker setImage={setAvatar} />
+            </div>
             {error && <div className={css.error}>{error}</div>}
             <button className={css.submit} type="submit" disabled={loading}>
                 {loading ? "Updating..." : "Update Avatar"}

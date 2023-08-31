@@ -11,8 +11,13 @@
     border-radius: 50%;
 }
 
+.user-name {
+    margin-bottom: 30px;
+}
+
 .association {
     text-align: center;
+    margin: 30px 0;
 }
 
 .assoc-button {
@@ -20,14 +25,24 @@
     border-radius: 5px;
     padding: 8px;
     font-weight: 500;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin: 30px 0;
     cursor: pointer;
     transition: 0.1s;
 }
 
+.chat {
+    color: rgb(38, 45, 58);
+    font-weight: 600;
+    text-decoration: none;
+}
+
 .chat:hover {
     color: blueviolet;
+    text-decoration: underline;
+}
+
+.friend {
+    margin: 15px 0;
 }
 
 .feed {

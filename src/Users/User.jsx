@@ -120,19 +120,19 @@ function User() {
     return (
         <div className={css.container}>
             <div className={css.header}>
-                <h1>
+                <h1 className={css["user-name"]}>
                     {user.first_name} {user.last_name}
                 </h1>
                 <img src={user.avatar.url} alt="" />
             </div>
             {user._id === currentUser._id ? (
                 <div className={css.association}>
-                    <h2>This is me.</h2>
+                    <h2 className={css["assoc-text"]}>This is me.</h2>
                     <UpdateAvatar onSuccess={fetchUser} />
                 </div>
             ) : user.invited_me ? (
                 <div className={css.association}>
-                    <h2>Invited me.</h2>
+                    <h2 className={css["assoc-text"]}>Invited me.</h2>
                     <AsyncButton
                         className={css["assoc-button"]}
                         content="Accept invite"
@@ -142,7 +142,7 @@ function User() {
                 </div>
             ) : user.is_invited ? (
                 <div className={css.association}>
-                    <h2>Is invited by me.</h2>
+                    <h2 className={css["assoc-text"]}>Is invited by me.</h2>
                     <AsyncButton
                         className={css["assoc-button"]}
                         content="Cancel invite"
@@ -152,22 +152,24 @@ function User() {
                 </div>
             ) : user.friendship_id ? (
                 <div className={css.association}>
-                    <h2>I am friends with him.</h2>
-                    <AsyncButton
-                        className={css["assoc-button"]}
-                        content="Unfriend"
-                        loadingContent="Unfriending..."
-                        mainAction={handleUnfriend}
-                    />
+                    <h2 className={css["assoc-text"]}>I am friends with him.</h2>
+                    <div>
+                        <AsyncButton
+                            className={css["assoc-button"]}
+                            content="Unfriend"
+                            loadingContent="Unfriending..."
+                            mainAction={handleUnfriend}
+                        />
+                    </div>
                     <div>
                         <Link className={css.chat} to={`/chats/${user.chat_id}`}>
-                            Chat
+                            Send a message
                         </Link>
                     </div>
                 </div>
             ) : (
                 <div className={css.association}>
-                    <h2>Not friends.</h2>
+                    <h2 className={css["assoc-text"]}>Not friends.</h2>
                     <AsyncButton
                         className={css["assoc-button"]}
                         content="Invite"
@@ -178,7 +180,7 @@ function User() {
             )}
             {user.friends.length > 0 && <h2>Friends</h2>}
             {user.friends.map((friend) => (
-                <div key={friend._id}>
+                <div className={css.friend} key={friend._id}>
                     <UserBox user={friend} />
                 </div>
             ))}

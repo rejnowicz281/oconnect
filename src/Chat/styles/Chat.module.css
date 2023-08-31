@@ -16,10 +16,11 @@
 .heading > a {
     text-decoration: none;
     color: black;
+    transition: 0.1s;
 }
 
 .heading > a:hover {
-    text-decoration: underline;
+    color: grey;
 }
 
 .messages {

@@ -5,9 +5,9 @@
 
 .user-box {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 20px;
     margin-bottom: 80px;
 }
 
@@ -21,8 +21,15 @@
     width: 100%;
 }
 
+.chat {
+    color: rgb(38, 45, 58);
+    font-weight: 600;
+    text-decoration: none;
+}
+
 .chat:hover {
     color: blueviolet;
+    text-decoration: underline;
 }
 
 .no-friends {
