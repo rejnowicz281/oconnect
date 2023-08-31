@@ -15,8 +15,8 @@ function FacebookLoginButton({ onSuccess }) {
             }}
             fields="name,picture"
             onFail={() => setLoading(false)}
-            onSuccess={() => {
-                onSuccess();
+            onSuccess={(res) => {
+                onSuccess(res);
                 setLoading(false);
             }}
             render={({ onClick }) => (
