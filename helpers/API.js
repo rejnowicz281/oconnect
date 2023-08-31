@@ -48,6 +48,28 @@ export async function apiFacebookLogin(access_token) {
     }
 }
 
+export async function apiGithubLogin(access_token) {
+    try {
+        const response = await api.post("github/login?access_token=" + access_token);
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function apiGetGithubToken(code) {
+    try {
+        const response = await api.post("github/token", {
+            code,
+        });
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function apiRegister(email, first_name, last_name, password, password_confirm, avatar) {
     try {
         const formData = new FormData();

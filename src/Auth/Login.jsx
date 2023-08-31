@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { apiDemoLogin, apiFacebookLogin, apiLogin } from "../../helpers/API";
+import { apiDemoLogin, apiFacebookLogin, apiGithubLogin, apiLogin } from "../../helpers/API";
 import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
 import FacebookLoginButton from "./FacebookLoginButton";
+import GithubLoginButton from "./GithubLoginButton";
 import cssAuth from "./styles/Auth.module.css";
 import cssLogin from "./styles/Login.module.css";
 
@@ -15,6 +16,12 @@ function Login() {
     const [persist, setPersist] = useState(true);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    async function handleGithubResponse(res) {
+        const loginResponse = await apiGithubLogin(res.data.token);
+
+        handleLoginResponse(loginResponse);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -85,6 +92,7 @@ function Login() {
                         {loading ? "Logging in..." : "Continue"}
                     </button>
                 </form>
+                <GithubLoginButton onSuccess={handleGithubResponse} />
                 <FacebookLoginButton onSuccess={handleFacebookResponse} />
                 <AsyncButton
                     className={cssLogin["demo-login"]}
