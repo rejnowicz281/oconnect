@@ -128,7 +128,12 @@ function User() {
             {user._id === currentUser._id ? (
                 <div className={css.association}>
                     <h2 className={css["assoc-text"]}>This is me.</h2>
-                    <UpdateAvatar onSuccess={fetchUser} />
+                    <UpdateAvatar
+                        onSuccess={async () => {
+                            setUser(null); // To force a re-render
+                            await fetchUser(id);
+                        }}
+                    />
                 </div>
             ) : user.invited_me ? (
                 <div className={css.association}>
