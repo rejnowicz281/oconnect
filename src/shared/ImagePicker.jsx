@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { FaXmark } from "react-icons/fa6";
 import styles from "./styles/ImagePicker.module.css";
 
 function ImagePicker({ setImage, id }) {
@@ -21,7 +22,7 @@ function ImagePicker({ setImage, id }) {
             <input className={styles.input} type="file" id={id} onChange={handleImageChange} />
             {imageIsSet && (
                 <button className={styles.cancel} type="button" onClick={handleCancelImage}>
-                    ☓
+                    <FaXmark />
                 </button>
             )}
         </div>
