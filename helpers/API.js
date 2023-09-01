@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "https://oconnect.fly.dev/";
+import { API_URL } from "./config";
 
 export const api = axios.create({
     baseURL: API_URL,
