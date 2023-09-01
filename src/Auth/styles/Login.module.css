@@ -8,27 +8,3 @@
     color: red;
     margin-bottom: 30px;
 }
-
-.demo-login {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid rgb(191, 191, 191);
-    border-radius: 5px;
-    font-size: 15px;
-    outline: none;
-    transition: 0.1s;
-    background-color: #3b3434;
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.demo-login:hover {
-    background-color: #4e4646;
-}
-
-.demo-login:disabled {
-    background-color: rgb(191, 191, 191);
-    color: rgb(127, 127, 127);
-    cursor: not-allowed;
-}

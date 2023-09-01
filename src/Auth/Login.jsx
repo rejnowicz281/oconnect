@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { apiDemoLogin, apiFacebookLogin, apiGithubLogin, apiLogin } from "../../helpers/API";
-import AsyncButton from "../shared/AsyncButton";
 import { useAuthStore } from "../store";
+import DemoLoginButton from "./DemoLoginButton";
 import FacebookLoginButton from "./FacebookLoginButton";
 import GithubLoginButton from "./GithubLoginButton";
 import cssAuth from "./styles/Auth.module.css";
@@ -94,12 +94,7 @@ function Login() {
                 </form>
                 <GithubLoginButton onSuccess={handleGithubResponse} />
                 <FacebookLoginButton onSuccess={handleFacebookResponse} />
-                <AsyncButton
-                    className={cssLogin["demo-login"]}
-                    content="Demo Login"
-                    loadingContent="Logging in..."
-                    mainAction={handleDemoLogin}
-                />
+                <DemoLoginButton mainAction={handleDemoLogin} />
                 <div className={cssAuth["auth-link-container"]}>
                     Don't have an account? <Link to="/register">Register</Link>
                 </div>
