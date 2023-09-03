@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { apiDemoLogin, apiFacebookLogin, apiGithubLogin, apiLogin } from "../../helpers/API";
+import { apiDemoLogin, apiFacebookLogin, apiGithubLogin, apiLogin } from "../../API/auth";
 import { useAuthStore } from "../store";
 import DemoLoginButton from "./DemoLoginButton";
 import FacebookLoginButton from "./FacebookLoginButton";

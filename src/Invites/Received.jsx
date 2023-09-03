@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { apiCreateFriendship, apiDeleteInvite, apiFetchInvitesReceived } from "../../helpers/API";
+import { apiCreateFriendship } from "../../API/friendships";
+import { apiDeleteInvite, apiFetchInvitesReceived } from "../../API/invites";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
 import PageLoading from "../shared/PageLoading";

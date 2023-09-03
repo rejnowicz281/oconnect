@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineLoading, AiOutlineSend } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import { apiCreateMessage } from "../../helpers/API";
+import { apiCreateMessage } from "../../API/chats";
 import css from "./styles/MessageForm.module.css";
 
 function MessageForm() {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { apiCreateInvite, apiDeleteInvite, apiFetchUsers } from "../../helpers/API";
+import { apiCreateInvite, apiDeleteInvite } from "../../API/invites";
+import { apiFetchUsers } from "../../API/users";
 import AsyncButton from "../shared/AsyncButton";
 import PageLoading from "../shared/PageLoading";
 import UserBox from "./UserBox";

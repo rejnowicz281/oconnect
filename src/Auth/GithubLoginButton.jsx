@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { BsGithub } from "react-icons/bs";
-import { apiGetGithubToken } from "../../helpers/API";
+import { apiGetGithubToken } from "../../API/auth";
 import { GITHUB_AUTH_URL } from "../../helpers/config";
 import css from "./styles/GithubLoginButton.module.css";
 

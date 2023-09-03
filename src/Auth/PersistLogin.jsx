@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { apiRefreshToken } from "../../helpers/API";
+import { apiRefreshToken } from "../../API/auth";
 import { useAuthStore } from "../store";
 
 function PersistLogin() {

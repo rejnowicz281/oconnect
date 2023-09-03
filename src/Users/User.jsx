@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-    apiCreateFriendship,
-    apiCreateInvite,
-    apiDeleteFriendship,
-    apiDeleteInvite,
-    apiFetchUser,
-    apiResetAvatar,
-} from "../../helpers/API";
+import { apiCreateFriendship, apiDeleteFriendship } from "../../API/friendships";
+import { apiCreateInvite, apiDeleteInvite } from "../../API/invites";
+import { apiResetAvatar } from "../../API/profile";
+import { apiFetchUser } from "../../API/users";
 import AddPostModal from "../Posts/AddPostModal";
 import Post from "../Posts/Post";
 import AsyncButton from "../shared/AsyncButton";

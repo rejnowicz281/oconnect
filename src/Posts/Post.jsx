@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { BsFillHeartFill, BsHeartbreakFill } from "react-icons/bs";
-import { apiDeletePost, apiLikePost } from "../../helpers/API";
+import { apiDeletePost, apiLikePost } from "../../API/posts";
 import formatDate from "../../helpers/formatDate";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";

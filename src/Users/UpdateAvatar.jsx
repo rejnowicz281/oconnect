@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { apiUpdateAvatar } from "../../helpers/API";
+import { apiUpdateAvatar } from "../../API/profile";
 import ImagePicker from "../shared/ImagePicker";
 import css from "./styles/UpdateAvatar.module.css";
 

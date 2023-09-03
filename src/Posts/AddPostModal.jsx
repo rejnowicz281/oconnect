@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { apiCreatePost } from "../../helpers/API";
+import { apiCreatePost } from "../../API/posts";
 import Modal from "../shared/Modal";
 import PostForm from "./PostForm";
 import cssModal from "./styles/AddPostModal.module.css";

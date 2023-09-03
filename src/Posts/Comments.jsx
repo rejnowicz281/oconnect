@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { apiDeletePostComment, apiFetchPostComments } from "../../helpers/API";
+import { apiDeletePostComment, apiFetchPostComments } from "../../API/posts";
 import formatDate from "../../helpers/formatDate";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";

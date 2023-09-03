@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import { create } from "zustand";
-import { apiLogout } from "../helpers/API";
+import { apiLogout } from "../API/auth";
 
 export const useAuthStore = create((set) => ({
     token: null,

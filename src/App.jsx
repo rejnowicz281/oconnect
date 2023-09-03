@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import { apiAuth, apiRefreshToken } from "../helpers/API";
+import { apiAuth } from "../API";
+import { apiRefreshToken } from "../API/auth";
 import Login from "./Auth/Login";
 import PersistLogin from "./Auth/PersistLogin";
 import Register from "./Auth/Register";

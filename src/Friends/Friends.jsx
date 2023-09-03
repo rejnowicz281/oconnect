@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { apiDeleteFriendship, apiFetchFriends } from "../../helpers/API";
+import { apiDeleteFriendship, apiFetchFriends } from "../../API/friendships";
 import UserBox from "../Users/UserBox";
 import AsyncButton from "../shared/AsyncButton";
 import PageLoading from "../shared/PageLoading";

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { AiOutlineLoading, AiOutlineSend } from "react-icons/ai";
-import { apiCreatePostComment } from "../../helpers/API";
+import { apiCreatePostComment } from "../../API/posts";
 import css from "./styles/CommentForm.module.css";
 
 function CommentForm({ postId, addComment }) {

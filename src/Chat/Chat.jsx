@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { apiDeleteMessage, apiFetchChat } from "../../helpers/API";
+import { apiDeleteMessage, apiFetchChat } from "../../API/chats";
 import { useAuthStore } from "../store";
 import MessageForm from "./MessageForm";
 import css from "./styles/Chat.module.css";

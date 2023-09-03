@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { apiFetchPosts } from "../../helpers/API";
+import { apiFetchPosts } from "../../API/posts";
 import AddPostModal from "../Posts/AddPostModal";
 import Post from "../Posts/Post";
 import PageLoading from "../shared/PageLoading";

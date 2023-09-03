@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { apiUpdatePost } from "../../helpers/API";
+import { apiUpdatePost } from "../../API/posts";
 import { postType } from "../propTypes";
 import Modal from "../shared/Modal";
 import PostForm from "./PostForm";
